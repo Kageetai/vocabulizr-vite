@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+import logo from './logo.svg';
+import './App.css';
+
+function App(): React.ReactNode {
+  const [count, setCount] = useState(0);
 
   return (
     <div className="App">
@@ -39,7 +40,7 @@ function App() {
         </p>
       </header>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
