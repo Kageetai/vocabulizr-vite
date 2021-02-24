@@ -1,7 +1,8 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import type { LabelAnnotation } from '../api';
-import { addWord, removeWord, useWords } from '../reducer';
+import { add, remove, selectWords } from '../reducers/words';
 
 interface Props {
   isOpen: boolean;
@@ -10,7 +11,8 @@ interface Props {
 }
 
 function Manage({ isOpen = false, labels, onAddWord }: Props): JSX.Element {
-  const [words, dispatch] = useWords();
+  const words = useSelector(selectWords);
+  const dispatch = useDispatch();
 
   const hasLabels = !!labels.length;
   const hasWords = !!words.length;
@@ -33,7 +35,7 @@ function Manage({ isOpen = false, labels, onAddWord }: Props): JSX.Element {
                 <button
                   className="primary"
                   onClick={() => {
-                    dispatch(addWord(l.description));
+                    dispatch(add(l.description));
                     onAddWord();
                   }}
                 >
@@ -56,7 +58,7 @@ function Manage({ isOpen = false, labels, onAddWord }: Props): JSX.Element {
               <li key={i} className="flex-grow mb-2">
                 <button
                   className="primary"
-                  onClick={() => dispatch(removeWord(w))}
+                  onClick={() => dispatch(remove(w))}
                 >
                   {w}
                 </button>

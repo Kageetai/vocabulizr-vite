@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 
 import { LabelAnnotation, postImage } from '../api';
-import { useWords } from '../reducer';
 
 import Manage from './Manage';
 import Practise from './Practise';
+import { useSelector } from "react-redux";
+import { selectWords } from "../reducers/words";
 
 const videoConstraints = {
   width: { min: 500 },
@@ -14,7 +15,7 @@ const videoConstraints = {
 };
 
 function App(): JSX.Element {
-  const [words] = useWords();
+  const words = useSelector(selectWords);
   const webcamRef = React.useRef<Webcam>(null);
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
   const [isPractiseOpen, setIsPractiseOpen] = useState(!!words.length);

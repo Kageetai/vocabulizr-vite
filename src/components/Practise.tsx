@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { useWords } from '../reducer';
 import type { LabelAnnotation } from '../api';
+import { selectWords } from '../reducers/words';
 
 interface Props {
   isOpen: boolean;
@@ -9,7 +10,7 @@ interface Props {
 }
 
 function Practise({ isOpen = false, labels }: Props): JSX.Element {
-  const [words] = useWords();
+  const words = useSelector(selectWords);
   const [currentWord, setCurrentWord] = useState(words.random());
 
   const hasLabels = !!labels.length;
