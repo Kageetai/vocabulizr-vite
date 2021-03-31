@@ -8,7 +8,7 @@ import './index.css';
 import store from './store';
 import './utils/array';
 
-ReactGA.initialize(import.meta.env.VITE_GA_ID);
+ReactGA.initialize(import.meta.env.VITE_GA_ID as string);
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactDOM.render(
