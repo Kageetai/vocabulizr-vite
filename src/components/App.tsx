@@ -50,7 +50,7 @@ function App(): JSX.Element {
 
   const videoConstraintsUser = {
     ...videoConstraints,
-    facingMode: isUserFacing ? "user" : "environment"
+    facingMode: isUserFacing ? 'user' : 'environment',
   };
 
   return (
@@ -59,6 +59,10 @@ function App(): JSX.Element {
         <h1>Vocabulizr</h1>
 
         <div className="relative max-w-full w-125 max-h-125 my-2 rounded-xl overflow-hidden">
+          <span className="absolute top-1/3 left-1/2 transform -translate-x-1/2">
+            Please allow us to use your device camera!
+          </span>
+
           <Webcam
             width={500}
             height={500}
