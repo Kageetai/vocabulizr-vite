@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
+import { useSelector } from 'react-redux';
 
 import { LabelAnnotation, postImage } from '../api';
+import { selectWords } from '../reducers/words';
 
 import Manage from './Manage';
 import Practise from './Practise';
-import { useSelector } from "react-redux";
-import { selectWords } from "../reducers/words";
 
 const videoConstraints = {
   width: { min: 500 },
   height: { min: 500 },
   aspectRatio: 1,
+  facingMode: { ideal: 'environment' },
 };
 
 function App(): JSX.Element {
@@ -19,6 +20,18 @@ function App(): JSX.Element {
   const webcamRef = React.useRef<Webcam>(null);
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
   const [isPractiseOpen, setIsPractiseOpen] = useState(!!words.length);
+  const [isUserFacing, setIsUserFacing] = useState(false);
+  const [devices, setDevices] = React.useState<MediaDeviceInfo[]>([]);
+
+  const handleDevices = React.useCallback(
+    (mediaDevices: MediaDeviceInfo[]) =>
+      setDevices(mediaDevices.filter(({ kind }) => kind === 'videoinput')),
+    [setDevices],
+  );
+
+  React.useEffect(() => {
+    navigator.mediaDevices.enumerateDevices().then(handleDevices);
+  }, [handleDevices]);
 
   const capture = React.useCallback(() => {
     if (webcamRef && webcamRef.current) {
@@ -35,6 +48,11 @@ function App(): JSX.Element {
 
   const toggleAccordion = () => setIsPractiseOpen((prev) => !prev);
 
+  const videoConstraintsUser = {
+    ...videoConstraints,
+    facingMode: isUserFacing ? "user" : "environment"
+  };
+
   return (
     <div className="h-screen bg-gray-50">
       <div className="max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
@@ -45,7 +63,7 @@ function App(): JSX.Element {
             width={500}
             height={500}
             mirrored={true}
-            videoConstraints={videoConstraints}
+            videoConstraints={videoConstraintsUser}
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
@@ -58,6 +76,15 @@ function App(): JSX.Element {
           >
             &nbsp;
           </button>
+
+          {devices.length > 1 && (
+            <button
+              className="changeCameraButton absolute top-0 right-0"
+              onClick={() => setIsUserFacing(!isUserFacing)}
+            >
+              &nbsp;
+            </button>
+          )}
         </div>
 
         {!hasLabels && !hasWords && (

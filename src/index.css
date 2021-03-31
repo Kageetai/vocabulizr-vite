@@ -59,4 +59,13 @@
   .accordion.isOpen {
     @apply max-h-96;
   }
+
+  .changeCameraButton {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 32px 32px 0;
+    border-color: transparent white transparent transparent;
+    opacity: 0.75;
+  }
 }
