@@ -6,6 +6,7 @@ import { selectCurrentPrompt } from '../reducers/prompts';
 
 import Header from './Header';
 import PromptView from './PromptView';
+import ResultView from './ResultView';
 
 function App(): JSX.Element {
   const currentPrompt = useSelector(selectCurrentPrompt);
@@ -20,11 +21,20 @@ function App(): JSX.Element {
       <div className="max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
         <Header />
 
-        {!labelsInPrompt.length && (
-          <PromptView currentPrompt={currentPrompt} onSetLabels={setLabels} />
-        )}
+        {currentPrompt && (
+          <>
+            {!labelsInPrompt.length && (
+              <PromptView
+                currentPrompt={currentPrompt}
+                onSetLabels={setLabels}
+              />
+            )}
 
-        {!!labelsInPrompt.length && <h1>Noice!</h1>}
+            {!!labelsInPrompt.length && (
+              <ResultView currentPrompt={currentPrompt} />
+            )}
+          </>
+        )}
       </div>
     </div>
   );

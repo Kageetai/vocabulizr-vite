@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 
 import { LabelAnnotation, postImage } from '../api';
-import { Prompt } from "../reducers/prompts";
+import { Prompt } from '../reducers/prompts';
 
 const videoConstraints = {
   width: { min: 500 },
@@ -12,7 +12,7 @@ const videoConstraints = {
 };
 
 interface Props {
-  currentPrompt?: Prompt;
+  currentPrompt: Prompt;
   onSetLabels: (labels: LabelAnnotation[]) => void;
 }
 
@@ -52,13 +52,11 @@ function App({ currentPrompt, onSetLabels }: Props): JSX.Element {
 
       <p>Learn a new Spanish word and saying with your camera.</p>
 
-      {currentPrompt && (
-        <div className="bg-gray-300 px-4 my-2">
-          <h3>How</h3>
+      <div className="bg-gray-300 px-4 my-2">
+        <h3>How</h3>
 
-          <p>{currentPrompt.hint}</p>
-        </div>
-      )}
+        <p>{currentPrompt.hint}</p>
+      </div>
 
       <div className="relative max-w-full w-125 max-h-125 my-2 rounded-xl overflow-hidden">
         <span className="absolute top-1/3 left-1/2 transform -translate-x-1/2">

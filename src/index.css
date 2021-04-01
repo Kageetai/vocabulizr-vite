@@ -64,6 +64,11 @@
   .max-w-125 {
     max-width: 500px;
   }
+
+  .text-primary {
+    color: rgba(255, 121, 15, 1);
+  }
+
 }
 
 @layer components {
