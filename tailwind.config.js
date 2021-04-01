@@ -3,8 +3,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      sans: ['Open Sans', 'sans-serif'],
-      serif: ['Roboto Slab', 'serif'],
+      sans: ['Babbel Milliard', 'sans-serif'],
+      serif: ['Leitura News', 'serif'],
     },
     extend: {
       transitionProperty: {

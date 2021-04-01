@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
-import { useSelector } from 'react-redux';
+import { Provider, useSelector } from "react-redux";
 
 import { LabelAnnotation, postImage } from '../api';
 import { selectWords } from '../reducers/words';
 
 import Manage from './Manage';
 import Practise from './Practise';
+import Header from "./Header";
 
 const videoConstraints = {
   width: { min: 500 },
@@ -56,7 +57,7 @@ function App(): JSX.Element {
   return (
     <div className="h-screen bg-gray-50">
       <div className="max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
-        <h1>Buscamara</h1>
+        <Header />
 
         <div className="relative max-w-full w-125 max-h-125 my-2 rounded-xl overflow-hidden">
           <span className="absolute top-1/3 left-1/2 transform -translate-x-1/2">

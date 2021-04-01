@@ -1,4 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Slab&display=swap');
+@font-face {
+  font-family: Leitura News;
+  font-style: normal;
+  font-weight: 700;
+  src: url('/LeituraNews-Roman4.woff2') format('woff2'), url('/LeituraNews-Roman4.woff') format('woff');
+}
+@font-face {
+  font-family: Babbel Milliard;
+  font-style: normal;
+  font-weight: 400;
+  src: url('/Milliard-Book.woff2') format('woff2'), url('/Milliard-Book.woff') format('woff');
+}
 
 @tailwind base;
 @tailwind components;
@@ -11,7 +22,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Roboto Slab', sans-serif;
+    font-family: 'Leitura News', sans-serif;
     margin-top: 1rem;
   }
 
