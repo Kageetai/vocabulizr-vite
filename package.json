@@ -10,8 +10,6 @@
     "prettier": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
-    "@lessonnine/design-system.lib": "^0.7.3",
-    "@lessonnine/design-tokens.lib": "^0.15.4",
     "@reduxjs/toolkit": "^1.5.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",

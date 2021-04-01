@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 import { useSelector } from 'react-redux';
-import tokens from '@lessonnine/design-tokens.lib/dist/json/variables.json';
 
 import { LabelAnnotation, postImage } from '../api';
 import { selectWords } from '../reducers/words';
@@ -15,8 +14,6 @@ const videoConstraints = {
   aspectRatio: 1,
   facingMode: { ideal: 'environment' },
 };
-
-console.log(tokens);
 
 function App(): JSX.Element {
   const words = useSelector(selectWords);
