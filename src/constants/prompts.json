@@ -1,0 +1,9 @@
+[
+  {
+    "word": "plato",
+    "phrase": "Pagar los platos rotos",
+    "hint": "Take a photo of a circular object you eat off of.",
+    "accepted": ["plate", "porcelain", "ceramics"],
+    "done": false
+  }
+]

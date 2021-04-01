@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import words from './reducers/words';
+import prompts from './reducers/prompts';
 
-const store = configureStore({ reducer: { words } });
+const store = configureStore({ reducer: { prompts } });
 
 export type RootState = ReturnType<typeof store.getState>;
 

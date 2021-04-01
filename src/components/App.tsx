@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
-import { Provider, useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
 import { LabelAnnotation, postImage } from '../api';
-import { selectWords } from '../reducers/words';
+import { selectCurrentPrompt } from '../reducers/prompts';
 
-import Manage from './Manage';
-import Practise from './Practise';
-import Header from "./Header";
+import Header from './Header';
 
 const videoConstraints = {
   width: { min: 500 },
@@ -17,10 +15,9 @@ const videoConstraints = {
 };
 
 function App(): JSX.Element {
-  const words = useSelector(selectWords);
+  const currentPrompt = useSelector(selectCurrentPrompt);
   const webcamRef = React.useRef<Webcam>(null);
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
-  const [isPractiseOpen, setIsPractiseOpen] = useState(!!words.length);
   const [isUserFacing, setIsUserFacing] = useState(false);
   const [devices, setDevices] = React.useState<MediaDeviceInfo[]>([]);
 
@@ -44,11 +41,6 @@ function App(): JSX.Element {
     }
   }, [webcamRef]);
 
-  const hasLabels = !!labels.length;
-  const hasWords = !!words.length;
-
-  const toggleAccordion = () => setIsPractiseOpen((prev) => !prev);
-
   const videoConstraintsUser = {
     ...videoConstraints,
     facingMode: isUserFacing ? 'user' : 'environment',
@@ -58,6 +50,14 @@ function App(): JSX.Element {
     <div className="h-screen bg-gray-50">
       <div className="max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
         <Header />
+
+        {currentPrompt && (
+          <div className="bg-gray-300 px-4 my-2">
+            <h3>How</h3>
+
+            <p>{currentPrompt.hint}</p>
+          </div>
+        )}
 
         <div className="relative max-w-full w-125 max-h-125 my-2 rounded-xl overflow-hidden">
           <span className="absolute top-1/3 left-1/2 transform -translate-x-1/2">
@@ -91,34 +91,6 @@ function App(): JSX.Element {
             </button>
           )}
         </div>
-
-        {!hasLabels && !hasWords && (
-          <h2>Take a picture to create your first word!</h2>
-        )}
-
-        {(hasLabels || hasWords) && (
-          <>
-            {hasWords && (
-              <>
-                <h2 className="accordion-header" onClick={toggleAccordion}>
-                  Practise
-                </h2>
-
-                <Practise isOpen={isPractiseOpen} labels={labels} />
-
-                <h2 className="accordion-header" onClick={toggleAccordion}>
-                  Manage
-                </h2>
-              </>
-            )}
-
-            <Manage
-              isOpen={!isPractiseOpen}
-              labels={labels}
-              onAddWord={() => setLabels([])}
-            />
-          </>
-        )}
       </div>
     </div>
   );
