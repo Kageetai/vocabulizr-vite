@@ -12,9 +12,10 @@ function App(): JSX.Element {
   const currentPrompt = useSelector(selectCurrentPrompt);
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
 
-  const labelsInPrompt = labels.filter((l) =>
+  const labelsInPrompt = !!labels.filter((l) =>
     currentPrompt?.accepted.includes(l.description.toLowerCase()),
-  );
+  ).length;
+  const hasLabels = !!labels.length;
 
   return (
     <div className="h-screen bg-gray-50">
@@ -23,16 +24,16 @@ function App(): JSX.Element {
 
         {currentPrompt && (
           <>
-            {!labelsInPrompt.length && (
+            {!labelsInPrompt && (
               <PromptView
                 currentPrompt={currentPrompt}
                 onSetLabels={setLabels}
               />
             )}
 
-            {!!labelsInPrompt.length && (
-              <ResultView currentPrompt={currentPrompt} />
-            )}
+            {hasLabels && !labelsInPrompt && <h2>Wrong! Try again!</h2>}
+
+            {labelsInPrompt && <ResultView currentPrompt={currentPrompt} />}
           </>
         )}
       </div>
