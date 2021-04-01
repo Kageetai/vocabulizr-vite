@@ -75,7 +75,7 @@ function App(): JSX.Element {
           />
 
           <button
-            className="bg-gray-50 bg-opacity-75 hover:bg-opacity-90 w-16 h-16 rounded-full focus:ring absolute bottom-2 left-1/2 transform -translate-x-1/2"
+            className="opacity-75 hover:opacity-90 w-16 h-16 rounded-full focus:ring absolute bottom-2 left-1/2 transform -translate-x-1/2"
             onClick={capture}
             aria-label="Capture image"
           >

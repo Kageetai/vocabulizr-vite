@@ -16,6 +16,10 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    color: rgb(12, 46, 68);
+  }
+
   h1,
   h2,
   h3,
@@ -38,8 +42,12 @@
     @apply text-xl;
   }
 
+  button {
+    background-color: rgba(255, 121, 15, 1);
+  }
+
   button.primary {
-    @apply bg-yellow-600 rounded px-4 py-1 text-white min-w-min;
+    @apply rounded px-4 py-1 text-white min-w-min;
     min-width: 100px;
   }
 }
@@ -76,7 +84,7 @@
     height: 0;
     border-style: solid;
     border-width: 0 32px 32px 0;
-    border-color: transparent white transparent transparent;
+    border-color: transparent rgba(255, 121, 15, 0.75) transparent transparent;
     opacity: 0.75;
   }
 }
