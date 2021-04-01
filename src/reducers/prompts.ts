@@ -17,7 +17,7 @@ export const selectCurrentPrompt = createSelector(
   (app) => app.prompts.find(undoneFilter),
 );
 
-interface Prompt {
+export interface Prompt {
   word: string;
   phrase: string;
   hint: string;
