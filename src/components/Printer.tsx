@@ -1,13 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-import { selectDonePrompts } from '../reducers/prompts';
+import { Prompt } from '../reducers/prompts';
 
-function Printer(): JSX.Element {
-  const donePrompts = useSelector(selectDonePrompts);
+interface Props {
+  donePrompts: Prompt[];
+}
 
+function Printer({ donePrompts }: Props): JSX.Element {
   return (
-    <div className="printer-frame">
+    <div className="printer-frame mt-4">
       <div className="printer-slot" />
 
       <div className="printer-button" />

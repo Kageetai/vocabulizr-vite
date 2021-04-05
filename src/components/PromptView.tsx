@@ -16,7 +16,7 @@ interface Props {
   onSetLabels: (labels: LabelAnnotation[]) => void;
 }
 
-function App({ currentPrompt, onSetLabels }: Props): JSX.Element {
+function PromptView({ currentPrompt, onSetLabels }: Props): JSX.Element {
   const webcamRef = React.useRef<Webcam>(null);
   const [isUserFacing, setIsUserFacing] = useState(false);
   const [devices, setDevices] = React.useState<MediaDeviceInfo[]>([]);
@@ -101,4 +101,4 @@ function App({ currentPrompt, onSetLabels }: Props): JSX.Element {
   );
 }
 
-export default App;
+export default PromptView;

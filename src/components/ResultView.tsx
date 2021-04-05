@@ -7,7 +7,7 @@ interface Props {
   onNext: () => void;
 }
 
-function App({ currentPrompt, onNext }: Props): JSX.Element {
+function ResultView({ currentPrompt, onNext }: Props): JSX.Element {
   return (
     <div>
       <h1>¡Correcto!</h1>
@@ -30,4 +30,4 @@ function App({ currentPrompt, onNext }: Props): JSX.Element {
   );
 }
 
-export default App;
+export default ResultView;

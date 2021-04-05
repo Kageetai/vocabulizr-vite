@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { LabelAnnotation } from '../api';
-import { markCurrentAsDone, selectCurrentPrompt } from '../reducers/prompts';
+import {
+  markCurrentAsDone,
+  selectCurrentPrompt,
+  selectDonePrompts,
+} from '../reducers/prompts';
 
 import Header from './Header';
 import PromptView from './PromptView';
 import ResultView from './ResultView';
 import Printer from './Printer';
+import DoneView from './DoneView';
 
 function App(): JSX.Element {
   const currentPrompt = useSelector(selectCurrentPrompt);
+  const donePrompts = useSelector(selectDonePrompts);
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
   const dispatch = useDispatch();
 
@@ -51,7 +57,11 @@ function App(): JSX.Element {
 
         {debug && labelsList}
 
-        <Printer />
+        {!currentPrompt && donePrompts.length && (
+          <DoneView totalPromptsCount={donePrompts.length} />
+        )}
+
+        <Printer donePrompts={donePrompts} />
       </div>
     </div>
   );
