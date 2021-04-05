@@ -17,6 +17,9 @@ function App(): JSX.Element {
   ).length;
   const hasLabels = !!labels.length;
 
+  const debug = new URLSearchParams(location.search).has('debug');
+  const labelsList = labels.map((l) => l.description).join(',');
+
   return (
     <div className="h-screen bg-gray-50">
       <div className="max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
@@ -36,6 +39,8 @@ function App(): JSX.Element {
             {labelsInPrompt && <ResultView currentPrompt={currentPrompt} />}
           </>
         )}
+
+        {debug && labelsList}
       </div>
     </div>
   );
