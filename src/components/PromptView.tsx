@@ -73,13 +73,15 @@ function App({ currentPrompt, onSetLabels }: Props): JSX.Element {
           screenshotFormat="image/jpeg"
         />
 
-        <button
-          className="opacity-75 hover:opacity-90 w-16 h-16 rounded-full focus:ring absolute bottom-2 left-1/2 transform -translate-x-1/2"
-          onClick={capture}
-          aria-label="Capture image"
-        >
-          &nbsp;
-        </button>
+        {devices.length && (
+          <button
+            className="opacity-75 hover:opacity-90 w-16 h-16 rounded-full focus:ring absolute bottom-2 left-1/2 transform -translate-x-1/2"
+            onClick={capture}
+            aria-label="Capture image"
+          >
+            &nbsp;
+          </button>
+        )}
 
         {devices.length > 1 && (
           <button
