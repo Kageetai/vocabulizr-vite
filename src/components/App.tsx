@@ -7,6 +7,7 @@ import { markCurrentAsDone, selectCurrentPrompt } from '../reducers/prompts';
 import Header from './Header';
 import PromptView from './PromptView';
 import ResultView from './ResultView';
+import Printer from './Printer';
 
 function App(): JSX.Element {
   const currentPrompt = useSelector(selectCurrentPrompt);
@@ -49,6 +50,8 @@ function App(): JSX.Element {
         )}
 
         {debug && labelsList}
+
+        <Printer />
       </div>
     </div>
   );

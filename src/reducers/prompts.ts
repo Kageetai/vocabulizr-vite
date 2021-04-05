@@ -4,6 +4,7 @@ import { RootState } from '../store';
 import prompts from '../constants/prompts.json';
 
 const undoneFilter = (p: Prompt) => !p.done;
+const doneFilter = (p: Prompt) => p.done;
 
 export const selectPrompts = createSelector(
   (state: RootState) => state.prompts,
@@ -13,6 +14,11 @@ export const selectPrompts = createSelector(
 export const selectCurrentPrompt = createSelector(
   (state: RootState) => state.prompts,
   (app) => app.prompts.find(undoneFilter),
+);
+
+export const selectDonePrompts = createSelector(
+  (state: RootState) => state.prompts,
+  (app) => app.prompts.filter(doneFilter),
 );
 
 export interface Prompt {
