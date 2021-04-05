@@ -90,6 +90,8 @@
     border-style: solid;
     border-width: 0 32px 32px 0;
     border-color: transparent rgba(255, 121, 15, 0.75) transparent transparent;
+    background-color: transparent;
+
     opacity: 0.75;
   }
 }
