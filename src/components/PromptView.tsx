@@ -8,7 +8,7 @@ const videoConstraints = {
   width: { min: 500 },
   height: { min: 500 },
   aspectRatio: 1,
-  facingMode: { ideal: 'environment' },
+  facingMode: 'user',
 };
 
 interface Props {
@@ -29,6 +29,7 @@ function App({ currentPrompt, onSetLabels }: Props): JSX.Element {
 
   React.useEffect(() => {
     navigator.mediaDevices.enumerateDevices().then(handleDevices);
+    setIsUserFacing(devices.length === 1);
   }, [handleDevices]);
 
   const capture = React.useCallback(() => {
@@ -45,6 +46,7 @@ function App({ currentPrompt, onSetLabels }: Props): JSX.Element {
     ...videoConstraints,
     facingMode: isUserFacing ? 'user' : 'environment',
   };
+  const hasSeveralCameras = devices.length > 1;
 
   return (
     <div>
@@ -59,14 +61,17 @@ function App({ currentPrompt, onSetLabels }: Props): JSX.Element {
       </div>
 
       <div className="relative max-w-full w-125 max-h-125 my-2 rounded-xl overflow-hidden">
-        <span className="absolute top-1/3 left-1/2 transform -translate-x-1/2">
+        <span className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -z-1">
           Please allow us to use your device camera!
         </span>
 
         <Webcam
           width={500}
           height={500}
-          mirrored={true}
+          mirrored={
+            (!hasSeveralCameras && isUserFacing) ||
+            (hasSeveralCameras && isUserFacing)
+          }
           videoConstraints={videoConstraintsUser}
           audio={false}
           ref={webcamRef}
@@ -83,7 +88,7 @@ function App({ currentPrompt, onSetLabels }: Props): JSX.Element {
           </button>
         )}
 
-        {devices.length > 1 && (
+        {hasSeveralCameras && (
           <button
             className="changeCameraButton absolute top-0 right-0"
             onClick={() => setIsUserFacing(!isUserFacing)}

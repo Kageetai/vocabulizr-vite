@@ -10,6 +10,9 @@ module.exports = {
       transitionProperty: {
         'max-h': 'max-height',
       },
+      zIndex: {
+        '-1': '-1',
+      },
     },
   },
   variants: {
