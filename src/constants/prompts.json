@@ -5,5 +5,12 @@
     "hint": "Take a photo of a circular object you eat off of.",
     "accepted": ["plate", "porcelain", "ceramics"],
     "done": false
+  },
+  {
+    "word": "egg",
+    "phrase": "\"¿Qué le dice el huevo a la sartén?\" \"Me tienes FRITO\"",
+    "hint": "What is the most typical white breakfast food?",
+    "accepted": ["egg", "pan"],
+    "done": false
   }
 ]

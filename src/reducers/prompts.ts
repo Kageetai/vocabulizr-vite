@@ -3,9 +3,7 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import prompts from '../constants/prompts.json';
 
-function undoneFilter() {
-  return (p: Prompt) => !p.done;
-}
+const undoneFilter = (p: Prompt) => !p.done;
 
 export const selectPrompts = createSelector(
   (state: RootState) => state.prompts,

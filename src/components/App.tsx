@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { LabelAnnotation } from '../api';
-import { selectCurrentPrompt } from '../reducers/prompts';
+import { markCurrentAsDone, selectCurrentPrompt } from '../reducers/prompts';
 
 import Header from './Header';
 import PromptView from './PromptView';
@@ -11,6 +11,7 @@ import ResultView from './ResultView';
 function App(): JSX.Element {
   const currentPrompt = useSelector(selectCurrentPrompt);
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
+  const dispatch = useDispatch();
 
   const labelsInPrompt = !!labels.filter((l) =>
     currentPrompt?.accepted.includes(l.description.toLowerCase()),
@@ -19,6 +20,11 @@ function App(): JSX.Element {
 
   const debug = new URLSearchParams(location.search).has('debug');
   const labelsList = labels.map((l) => l.description).join(',');
+
+  const onNext = () => {
+    dispatch(markCurrentAsDone());
+    setLabels([]);
+  };
 
   return (
     <div className="h-screen bg-gray-50">
@@ -36,7 +42,9 @@ function App(): JSX.Element {
 
             {hasLabels && !labelsInPrompt && <h2>Wrong! Try again!</h2>}
 
-            {labelsInPrompt && <ResultView currentPrompt={currentPrompt} />}
+            {labelsInPrompt && (
+              <ResultView currentPrompt={currentPrompt} onNext={onNext} />
+            )}
           </>
         )}
 

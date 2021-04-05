@@ -4,9 +4,10 @@ import { Prompt } from '../reducers/prompts';
 
 interface Props {
   currentPrompt: Prompt;
+  onNext: () => void;
 }
 
-function App({ currentPrompt }: Props): JSX.Element {
+function App({ currentPrompt, onNext }: Props): JSX.Element {
   return (
     <div>
       <h1>¡Correcto!</h1>
@@ -21,6 +22,10 @@ function App({ currentPrompt }: Props): JSX.Element {
 
         <p>{currentPrompt.phrase}</p>
       </div>
+
+      <button className="primary" onClick={onNext}>
+        Next
+      </button>
     </div>
   );
 }
