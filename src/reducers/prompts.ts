@@ -1,4 +1,4 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Selector } from 'react-redux';
 
 import { RootState } from '../store';
@@ -47,15 +47,12 @@ const promptsSlice = createSlice({
   name: 'prompts',
   initialState,
   reducers: {
-    markCurrentAsDone: (state) => {
-      const current = state.prompts.find(undoneFilter);
-      if (current) {
-        current.done = true;
-      }
+    markPromptAsDone: (state, action: PayloadAction<number>) => {
+      state.prompts[action.payload].done = true;
     },
   },
 });
 
-export const { markCurrentAsDone } = promptsSlice.actions;
+export const { markPromptAsDone } = promptsSlice.actions;
 
 export default promptsSlice.reducer;

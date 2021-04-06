@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'wouter';
 import useLocation from 'wouter/use-location';
 
 import { LabelAnnotation, postImage } from '../api';
-import { selectPromptByIndex, selectPromptLength } from '../reducers/prompts';
+import {
+  markPromptAsDone,
+  selectPromptByIndex,
+  selectPromptLength,
+} from '../reducers/prompts';
 
 import ResultBox from './ResultBox';
 import CameraBox from './CameraBox';
@@ -16,6 +20,7 @@ interface Props {
 function PromptView({ index }: Props): JSX.Element {
   const currentPrompt = useSelector(selectPromptByIndex(index));
   const promptsLength = useSelector(selectPromptLength);
+  const dispatch = useDispatch();
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
   const [_, setLocation] = useLocation();
 
@@ -26,6 +31,7 @@ function PromptView({ index }: Props): JSX.Element {
   const onSuccess = () => {
     setTimeout(() => {
       setLabels([]);
+      dispatch(markPromptAsDone(index));
       setLocation(nextRoute);
     }, 1000);
   };
