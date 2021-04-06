@@ -1,18 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import { selectDonePrompts } from '../reducers/prompts';
 
 import Printer from './Printer';
 
-interface Props {
-  totalPromptsCount: number;
-}
+function DoneView(): JSX.Element {
+  const donePrompts = useSelector(selectDonePrompts);
 
-function DoneView({ totalPromptsCount }: Props): JSX.Element {
   return (
     <div>
       <h1>¡Felicidades!</h1>
 
-      <p>You found all the {totalPromptsCount} words and sayings!</p>
-
+      <p className="my-2">You found {donePrompts.length} words and sayings!</p>
       <Printer />
     </div>
   );

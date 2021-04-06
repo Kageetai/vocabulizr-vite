@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 import { useSelector } from 'react-redux';
+import { Link } from 'wouter';
 
 import { LabelAnnotation, postImage } from '../api';
-import { selectPromptByIndex } from '../reducers/prompts';
+import { selectPromptByIndex, selectPromptLength } from '../reducers/prompts';
 
 const videoConstraints = {
   width: { min: 500 },
@@ -18,6 +19,7 @@ interface Props {
 
 function PromptView({ index }: Props): JSX.Element {
   const currentPrompt = useSelector(selectPromptByIndex(index));
+  const promptsLength = useSelector(selectPromptLength);
   const webcamRef = React.useRef<Webcam>(null);
   const [isUserFacing, setIsUserFacing] = useState(false);
   const [devices, setDevices] = React.useState<MediaDeviceInfo[]>([]);
@@ -128,6 +130,10 @@ function PromptView({ index }: Props): JSX.Element {
       )}
 
       {debug && labelsList}
+
+      <Link href={index >= promptsLength ? `/end` : `/${index + 1}`}>
+        <small>Skip</small>
+      </Link>
     </div>
   );
 }

@@ -21,6 +21,11 @@ export const selectDonePrompts = createSelector(selectPrompts, (app) =>
   app.prompts.filter(doneFilter),
 );
 
+export const selectPromptLength = createSelector(
+  selectPrompts,
+  (app) => app.prompts.length,
+);
+
 export interface Prompt {
   word: string;
   phrase: string;

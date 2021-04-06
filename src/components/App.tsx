@@ -1,12 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Route } from 'wouter';
-
-import {
-  markCurrentAsDone,
-  selectCurrentPrompt,
-  selectDonePrompts,
-} from '../reducers/prompts';
+import { Redirect, Route, Switch } from 'wouter';
 
 import Header from './Header';
 import PromptView from './PromptView';
@@ -15,28 +8,26 @@ import Printer from './Printer';
 import DoneView from './DoneView';
 
 function App(): JSX.Element {
-  const currentPrompt = useSelector(selectCurrentPrompt);
-  const donePrompts = useSelector(selectDonePrompts);
-  const dispatch = useDispatch();
-
   return (
     <div className="h-screen bg-gray-50">
       <div className="min-h-screen max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
         <Header />
 
-        <Route path="/">
-          <Redirect to="/0" />
-        </Route>
+        <Switch>
+          <Route path="/">
+            <Redirect to="/0" />
+          </Route>
 
-        <Route path="/:index">
-          {(params) => <PromptView index={parseInt(params.index || '0', 10)} />}
-        </Route>
+          <Route path="/all" component={Printer} />
 
-        {!currentPrompt && donePrompts.length && (
-          <DoneView totalPromptsCount={donePrompts.length} />
-        )}
+          <Route path="/end" component={DoneView} />
 
-        <Route path="/all" component={Printer} />
+          <Route path="/:index">
+            {(params) => (
+              <PromptView index={parseInt(params.index || '0', 10)} />
+            )}
+          </Route>
+        </Switch>
 
         <div className="text-center mt-auto py-2">
           <img
