@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route } from 'wouter';
 
-import { LabelAnnotation } from '../api';
 import {
   markCurrentAsDone,
   selectCurrentPrompt,
@@ -20,13 +19,6 @@ function App(): JSX.Element {
   const donePrompts = useSelector(selectDonePrompts);
   const dispatch = useDispatch();
 
-  // const debug = new URLSearchParams(location.search).has('debug');
-  // const labelsList = labels.map((l) => l.description).join(',');
-
-  const onNext = () => {
-    dispatch(markCurrentAsDone());
-  };
-
   return (
     <div className="h-screen bg-gray-50">
       <div className="min-h-screen max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
@@ -39,23 +31,6 @@ function App(): JSX.Element {
         <Route path="/:index">
           {(params) => <PromptView index={parseInt(params.index || '0', 10)} />}
         </Route>
-
-        {/*{currentPrompt && (*/}
-        {/*  <>*/}
-        {/*    {!labelsInPrompt && (*/}
-        {/*      <PromptView*/}
-        {/*        currentPrompt={currentPrompt}*/}
-        {/*        onSetLabels={setLabels}*/}
-        {/*      />*/}
-        {/*    )}*/}
-
-        {/*    {hasLabels && !labelsInPrompt && <h2>Wrong! Try again!</h2>}*/}
-
-        {/*    {labelsInPrompt && (*/}
-        {/*      <ResultView currentPrompt={currentPrompt} onNext={onNext} />*/}
-        {/*    )}*/}
-        {/*  </>*/}
-        {/*)}*/}
 
         {!currentPrompt && donePrompts.length && (
           <DoneView totalPromptsCount={donePrompts.length} />

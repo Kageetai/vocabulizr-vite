@@ -53,13 +53,11 @@ function PromptView({ index }: Props): JSX.Element {
     currentPrompt?.accepted.includes(l.description.toLowerCase()),
   ).length;
   const hasLabels = !!labels.length;
+  const debug = new URLSearchParams(location.search).has('debug');
+  const labelsList = labels.map((l) => l.description).join(',');
 
   return (
     <div>
-      <h1>¡Bienvenido a Buscamara!</h1>
-
-      <p>Learn a new Spanish word and saying with your camera.</p>
-
       <div className="bg-gray-300 px-4 my-2">
         <h3>How</h3>
 
@@ -103,6 +101,11 @@ function PromptView({ index }: Props): JSX.Element {
           </button>
         )}
       </div>
+
+      {hasLabels && !labelsInPrompt && <h2>Wrong! Try again!</h2>}
+      {hasLabels && labelsInPrompt && <h2>Correct!</h2>}
+
+      {debug && labelsList}
     </div>
   );
 }
