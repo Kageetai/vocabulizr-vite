@@ -54,17 +54,25 @@ function PromptView({ index }: Props): JSX.Element {
   ).length;
   const hasLabels = !!labels.length;
   const debug = new URLSearchParams(location.search).has('debug');
-  const labelsList = labels.map((l) => l.description).join(',');
+  const labelsList = labels.map((l) => l.description).join(', ');
 
   return (
     <div>
-      <div className="bg-gray-300 px-4 my-2">
-        <h3>How</h3>
+      <div className="px-4 py-1 my-2 border-border border-2 rounded-xl flex items-center">
+        <div className="w-16">
+          <img src="/camera.png" alt="Camera" />
+        </div>
 
-        <p>{currentPrompt?.hint}</p>
+        <div>
+          <small>Take a photo of...</small>
+
+          <h3 className="mt-1 leading-6 font-sans text-primary">
+            {currentPrompt?.hint}
+          </h3>
+        </div>
       </div>
 
-      <div className="relative max-w-full w-125 max-h-125 my-2 rounded-xl overflow-hidden">
+      <div className="relative max-w-full w-125 max-h-125 my-6 rounded-xl overflow-hidden">
         <span className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -z-1">
           Please allow us to use your device camera!
         </span>
@@ -102,8 +110,22 @@ function PromptView({ index }: Props): JSX.Element {
         )}
       </div>
 
-      {hasLabels && !labelsInPrompt && <h2>Wrong! Try again!</h2>}
-      {hasLabels && labelsInPrompt && <h2>Correct!</h2>}
+      {hasLabels && (
+        <div className="px-4 py-2 my-2 border-border border-2 rounded-xl flex items-center">
+          <div className="w-16">
+            <img src="/lens.png" alt="Camera" />
+          </div>
+
+          <h3 className="mt-0 leading-6 font-sans text-primary">
+            {labels[0].description}
+          </h3>
+
+          <div className="ml-auto text-2xl">
+            {hasLabels && !labelsInPrompt && <p>❌</p>}
+            {hasLabels && labelsInPrompt && <p>✓</p>}
+          </div>
+        </div>
+      )}
 
       {debug && labelsList}
     </div>

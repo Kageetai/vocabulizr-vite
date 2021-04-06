@@ -14,12 +14,16 @@
 }
 
 @tailwind base;
-@tailwind components;
+@tailwind componentsl;
 @tailwind utilities;
 
 @layer base {
   body {
     color: rgb(12, 46, 68);
+
+    --primary: rgba(255, 121, 15, 1);
+    --primary-75: rgba(255, 121, 15, .75);
+    --border: #0F293C;
   }
 
   h1,
@@ -45,7 +49,7 @@
   }
 
   button {
-    background-color: rgba(255, 121, 15, 1);
+    background-color: var(--primary);
   }
 
   button.primary {
@@ -76,7 +80,7 @@
   }
 
   .text-primary {
-    color: rgba(255, 121, 15, 1);
+    color: var(--primary);
   }
 }
 
@@ -97,7 +101,7 @@
     @apply w-0 h-0 border-solid bg-transparent opacity-75;
 
     border-width: 0 32px 32px 0;
-    border-color: transparent rgba(255, 121, 15, 0.75) transparent transparent;
+    border-color: transparent var(--primary-75) transparent transparent;
   }
 
   .printer-frame {

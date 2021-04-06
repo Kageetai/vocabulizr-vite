@@ -7,6 +7,11 @@ module.exports = {
       serif: ['Leitura News', 'serif'],
     },
     extend: {
+      colors: {
+        primary: 'var(--primary)',
+        'primary-75': 'var(--primary-75)',
+        border: 'var(--border)',
+      },
       transitionProperty: {
         'max-h': 'max-height',
       },
