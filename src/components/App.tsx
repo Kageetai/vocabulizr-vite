@@ -27,6 +27,12 @@ function App(): JSX.Element {
               <PromptView index={parseInt(params.index || '0', 10)} />
             )}
           </Route>
+
+          <Route path="/:index/success">
+            {(params) => (
+              <ResultView index={parseInt(params.index || '0', 10)} />
+            )}
+          </Route>
         </Switch>
 
         <div className="text-center mt-auto py-2">

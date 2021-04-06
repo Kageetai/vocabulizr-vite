@@ -104,6 +104,10 @@
     border-color: transparent var(--primary-75) transparent transparent;
   }
 
+  .border-box {
+    @apply px-4 py-1 my-2 border-border border-2 rounded-xl;
+  }
+
   .printer-frame {
     position: relative;
     width: 100%;

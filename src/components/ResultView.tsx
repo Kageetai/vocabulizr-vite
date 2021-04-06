@@ -1,31 +1,46 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link, Redirect } from 'wouter';
 
-import { Prompt } from '../reducers/prompts';
+import { selectPromptByIndex, selectPromptLength } from '../reducers/prompts';
 
 interface Props {
-  currentPrompt: Prompt;
-  onNext: () => void;
+  index: number;
 }
 
-function ResultView({ currentPrompt, onNext }: Props): JSX.Element {
+function ResultView({ index }: Props): JSX.Element {
+  const currentPrompt = useSelector(selectPromptByIndex(index));
+  const promptsLength = useSelector(selectPromptLength);
+
+  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
+
+  if (!currentPrompt) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div>
       <h1>¡Correcto!</h1>
 
-      <p>
-        You took a photo of a{' '}
-        <span className="text-primary">{currentPrompt.word}.</span>
-      </p>
-
-      <div className="border px-4 my-2">
-        <h3>The Phrase</h3>
+      <div className="border-box">
+        <h3 className="mt-1">The Phrase</h3>
 
         <p>{currentPrompt.phrase}</p>
       </div>
 
-      <button className="primary" onClick={onNext}>
-        Next
-      </button>
+      <p className="my-4 italic">&quot;{currentPrompt.explanation}&quot;</p>
+
+      <p className="my-2">
+        <Link href={nextRoute}>
+          <button className="primary">Next</button>
+        </Link>
+      </p>
+
+      <small>
+        <Link href="/end">
+          <button className="clean">End</button>
+        </Link>
+      </small>
     </div>
   );
 }

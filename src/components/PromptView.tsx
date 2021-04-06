@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 import { useSelector } from 'react-redux';
-import { Link } from 'wouter';
+import { Link, Redirect } from 'wouter';
 import useLocation from 'wouter/use-location';
 
 import { LabelAnnotation, postImage } from '../api';
@@ -68,7 +68,11 @@ function PromptView({ index }: Props): JSX.Element {
   const hasLabels = !!labels.length;
   const debug = new URLSearchParams(location.search).has('debug');
   const labelsList = labels.map((l) => l.description).join(', ');
-  const nextRoute = index >= promptsLength ? `/end` : `/${index + 1}`;
+  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
+
+  if (!currentPrompt) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div>
@@ -81,7 +85,7 @@ function PromptView({ index }: Props): JSX.Element {
           <small>Take a photo of...</small>
 
           <h3 className="mt-1 leading-6 font-sans text-primary">
-            {currentPrompt?.hint}
+            {currentPrompt.hint}
           </h3>
         </div>
       </div>

@@ -31,6 +31,7 @@ export interface Prompt {
   phrase: string;
   hint: string;
   accepted: string[];
+  explanation: string;
   done: boolean;
 }
 

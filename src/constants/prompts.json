@@ -4,6 +4,7 @@
     "phrase": "Pagar los platos rotos",
     "hint": "Take a photo of a circular object you eat off of.",
     "accepted": ["plate", "porcelain", "ceramics", "tableware", "dishware", "serveware"],
+    "explanation": "it's a plate!",
     "done": false
   },
   {
@@ -11,6 +12,7 @@
     "phrase": "\"¿Qué le dice el huevo a la sartén?\" \"Me tienes FRITO\"",
     "hint": "What is the most typical white breakfast food?",
     "accepted": ["egg", "pan", "circle"],
+    "explanation": "an egg",
     "done": false
   }
 ]
