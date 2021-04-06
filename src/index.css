@@ -105,6 +105,6 @@
   }
 
   .border-box {
-    @apply px-4 py-1 my-2 border-border border-2 rounded-xl;
+    @apply px-4 py-2 my-2 border-border border-2 rounded-xl;
   }
 }

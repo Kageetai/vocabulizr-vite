@@ -32,7 +32,7 @@ function PromptView({ index }: Props): JSX.Element {
     setTimeout(() => {
       setLabels([]);
       dispatch(markPromptAsDone(index));
-      setLocation(nextRoute);
+      setLocation(nextRoute + '/success');
     }, 1000);
   };
 
@@ -42,7 +42,7 @@ function PromptView({ index }: Props): JSX.Element {
   const hasLabels = !!labels.length;
   const debug = new URLSearchParams(location.search).has('debug');
   const labelsList = labels.map((l) => l.description).join(', ');
-  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index}/success`;
+  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
 
   if (!currentPrompt) {
     return <Redirect to="/" />;
@@ -50,7 +50,7 @@ function PromptView({ index }: Props): JSX.Element {
 
   return (
     <div>
-      <div className="px-4 py-1 my-2 border-border border-2 rounded-xl flex items-center">
+      <div className="border-box flex items-center">
         <div className="w-16">
           <img src="/camera.png" alt="Camera" />
         </div>

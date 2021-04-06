@@ -23,7 +23,7 @@ function PromptView({
   const success = hasLabels && labelsInPrompt;
 
   return (
-    <div className="px-4 py-2 my-2 border-border border-2 rounded-xl flex items-center">
+    <div className="border-box flex items-center">
       <div className="w-16">
         <img src="/lens.png" alt="Camera" />
       </div>
