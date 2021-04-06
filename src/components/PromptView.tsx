@@ -42,7 +42,7 @@ function PromptView({ index }: Props): JSX.Element {
   const hasLabels = !!labels.length;
   const debug = new URLSearchParams(location.search).has('debug');
   const labelsList = labels.map((l) => l.description).join(', ');
-  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
+  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index}/success`;
 
   if (!currentPrompt) {
     return <Redirect to="/" />;

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'wouter';
+import { useSelector } from 'react-redux';
+
+import { selectUndoneIndex } from '../reducers/prompts';
 
 import Header from './Header';
 import PromptView from './PromptView';
@@ -8,6 +11,9 @@ import Printer from './Printer';
 import DoneView from './DoneView';
 
 function App(): JSX.Element {
+  const undoneIndex = useSelector(selectUndoneIndex);
+  console.log(undoneIndex);
+
   return (
     <div className="h-screen bg-gray-50">
       <div className="min-h-screen max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
@@ -15,7 +21,7 @@ function App(): JSX.Element {
 
         <Switch>
           <Route path="/">
-            <Redirect to="/0" />
+            <Redirect to={`/${undoneIndex}`} />
           </Route>
 
           <Route path="/all" component={Printer} />
@@ -23,15 +29,11 @@ function App(): JSX.Element {
           <Route path="/end" component={DoneView} />
 
           <Route path="/:index">
-            {(params) => (
-              <PromptView index={parseInt(params.index || '0', 10)} />
-            )}
+            {(params) => <PromptView index={parseInt(params.index, 10)} />}
           </Route>
 
           <Route path="/:index/success">
-            {(params) => (
-              <ResultView index={parseInt(params.index || '0', 10)} />
-            )}
+            {(params) => <ResultView index={parseInt(params.index, 10)} />}
           </Route>
         </Switch>
 

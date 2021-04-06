@@ -13,8 +13,8 @@ export const selectPromptByIndex = (
 ): Selector<RootState, Prompt | undefined> =>
   createSelector(selectPrompts, (app) => app.prompts[index]);
 
-export const selectCurrentPrompt = createSelector(selectPrompts, (app) =>
-  app.prompts.find(undoneFilter),
+export const selectUndoneIndex = createSelector(selectPrompts, (app) =>
+  app.prompts.findIndex(undoneFilter),
 );
 
 export const selectDonePrompts = createSelector(selectPrompts, (app) =>
@@ -50,9 +50,12 @@ const promptsSlice = createSlice({
     markPromptAsDone: (state, action: PayloadAction<number>) => {
       state.prompts[action.payload].done = true;
     },
+    reset: (state) => {
+      state.prompts.forEach((p) => (p.done = false));
+    },
   },
 });
 
-export const { markPromptAsDone } = promptsSlice.actions;
+export const { markPromptAsDone, reset } = promptsSlice.actions;
 
 export default promptsSlice.reducer;
