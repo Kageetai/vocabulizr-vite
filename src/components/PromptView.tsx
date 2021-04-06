@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 import { useSelector } from 'react-redux';
 import { Link } from 'wouter';
+import useLocation from 'wouter/use-location';
 
 import { LabelAnnotation, postImage } from '../api';
 import { selectPromptByIndex, selectPromptLength } from '../reducers/prompts';
+
+import ResultBox from './ResultBox';
 
 const videoConstraints = {
   width: { min: 500 },
@@ -24,6 +27,7 @@ function PromptView({ index }: Props): JSX.Element {
   const [isUserFacing, setIsUserFacing] = useState(false);
   const [devices, setDevices] = React.useState<MediaDeviceInfo[]>([]);
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
+  const [_, setLocation] = useLocation();
 
   const handleDevices = React.useCallback(
     (mediaDevices: MediaDeviceInfo[]) =>
@@ -46,6 +50,13 @@ function PromptView({ index }: Props): JSX.Element {
     }
   }, [webcamRef]);
 
+  const onSuccess = () => {
+    setTimeout(() => {
+      setLabels([]);
+      setLocation(nextRoute);
+    }, 1000);
+  };
+
   const videoConstraintsUser = {
     ...videoConstraints,
     facingMode: isUserFacing ? 'user' : 'environment',
@@ -57,6 +68,7 @@ function PromptView({ index }: Props): JSX.Element {
   const hasLabels = !!labels.length;
   const debug = new URLSearchParams(location.search).has('debug');
   const labelsList = labels.map((l) => l.description).join(', ');
+  const nextRoute = index >= promptsLength ? `/end` : `/${index + 1}`;
 
   return (
     <div>
@@ -113,25 +125,17 @@ function PromptView({ index }: Props): JSX.Element {
       </div>
 
       {hasLabels && (
-        <div className="px-4 py-2 my-2 border-border border-2 rounded-xl flex items-center">
-          <div className="w-16">
-            <img src="/lens.png" alt="Camera" />
-          </div>
-
-          <h3 className="mt-0 leading-6 font-sans text-primary">
-            {labels[0].description}
-          </h3>
-
-          <div className="ml-auto text-2xl">
-            {hasLabels && !labelsInPrompt && <p>❌</p>}
-            {hasLabels && labelsInPrompt && <p>✓</p>}
-          </div>
-        </div>
+        <ResultBox
+          label={labels[0].description}
+          hasLabels={hasLabels}
+          labelsInPrompt={labelsInPrompt}
+          onSuccess={onSuccess}
+        />
       )}
 
       {debug && labelsList}
 
-      <Link href={index >= promptsLength ? `/end` : `/${index + 1}`}>
+      <Link href={nextRoute}>
         <small>Skip</small>
       </Link>
     </div>
