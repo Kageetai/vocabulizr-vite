@@ -1,18 +1,27 @@
 import React from 'react';
 import { Link } from 'wouter';
+import { useSelector } from 'react-redux';
 
-interface Props {
-  hasDonePrompts: boolean;
-}
+import { selectDonePrompts } from '../reducers/prompts';
 
-function Header({ hasDonePrompts }: Props): JSX.Element {
+function Header(): JSX.Element {
+  const donePrompts = useSelector(selectDonePrompts);
+  const hasDonePrompts = !!donePrompts.length;
+
   return (
-    <div className="pt-4 mb-2 flex justify-between">
-      <img src="/logo.png" alt="Babbel Language Lab Logo" />
+    <div className="relative mb-2 flex justify-center">
+      <div>
+        <h1>Buscamara</h1>
+
+        <small>Guess, capture, learn.</small>
+      </div>
 
       <Link href="/all">
-        <button className="clean" disabled={!hasDonePrompts}>
-          🖨
+        <button
+          className="clean absolute top-4 right-0"
+          disabled={!hasDonePrompts}
+        >
+          <img src="/scroll.png" alt="scroll" />
         </button>
       </Link>
     </div>
