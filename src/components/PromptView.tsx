@@ -50,8 +50,8 @@ function PromptView({ index }: Props): JSX.Element {
 
   return (
     <div>
-      <div className="border-box flex items-center">
-        <div className="w-16">
+      <div className="border-box flex items-center text-left">
+        <div className="w-16 mr-4">
           <img src="/camera.png" alt="Camera" />
         </div>
 
@@ -63,6 +63,10 @@ function PromptView({ index }: Props): JSX.Element {
           </h3>
         </div>
       </div>
+
+      <small>
+        {index} / {promptsLength}
+      </small>
 
       <CameraBox onCapture={onCapture} />
 
