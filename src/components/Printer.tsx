@@ -7,19 +7,13 @@ function Printer(): JSX.Element {
   const donePrompts = useSelector(selectDonePrompts);
 
   return (
-    <div className="printer-frame mt-4">
-      <div className="printer-slot" />
-
-      <div className="printer-button" />
-
-      <ul className="printer-paper">
-        {donePrompts.map((p) => (
-          <li key={p.word} className="my-2">
-            {p.phrase}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="border-box">
+      {donePrompts.map((p) => (
+        <li key={p.word} className="my-2">
+          {p.phrase}
+        </li>
+      ))}
+    </ul>
   );
 }
 
