@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
+import { useSelector } from 'react-redux';
 
 import { LabelAnnotation, postImage } from '../api';
-import { Prompt } from '../reducers/prompts';
+import { selectPromptByIndex } from '../reducers/prompts';
 
 const videoConstraints = {
   width: { min: 500 },
@@ -12,14 +13,15 @@ const videoConstraints = {
 };
 
 interface Props {
-  currentPrompt: Prompt;
-  onSetLabels: (labels: LabelAnnotation[]) => void;
+  index: number;
 }
 
-function PromptView({ currentPrompt, onSetLabels }: Props): JSX.Element {
+function PromptView({ index }: Props): JSX.Element {
+  const currentPrompt = useSelector(selectPromptByIndex(index));
   const webcamRef = React.useRef<Webcam>(null);
   const [isUserFacing, setIsUserFacing] = useState(false);
   const [devices, setDevices] = React.useState<MediaDeviceInfo[]>([]);
+  const [labels, setLabels] = useState<LabelAnnotation[]>([]);
 
   const handleDevices = React.useCallback(
     (mediaDevices: MediaDeviceInfo[]) =>
@@ -37,7 +39,7 @@ function PromptView({ currentPrompt, onSetLabels }: Props): JSX.Element {
       const imageSrc = webcamRef.current.getScreenshot();
 
       if (imageSrc) {
-        postImage(imageSrc).then(onSetLabels);
+        postImage(imageSrc).then(setLabels);
       }
     }
   }, [webcamRef]);
@@ -47,6 +49,10 @@ function PromptView({ currentPrompt, onSetLabels }: Props): JSX.Element {
     facingMode: isUserFacing ? 'user' : 'environment',
   };
   const hasSeveralCameras = devices.length > 1;
+  const labelsInPrompt = !!labels.filter((l) =>
+    currentPrompt?.accepted.includes(l.description.toLowerCase()),
+  ).length;
+  const hasLabels = !!labels.length;
 
   return (
     <div>
@@ -57,7 +63,7 @@ function PromptView({ currentPrompt, onSetLabels }: Props): JSX.Element {
       <div className="bg-gray-300 px-4 my-2">
         <h3>How</h3>
 
-        <p>{currentPrompt.hint}</p>
+        <p>{currentPrompt?.hint}</p>
       </div>
 
       <div className="relative max-w-full w-125 max-h-125 my-2 rounded-xl overflow-hidden">

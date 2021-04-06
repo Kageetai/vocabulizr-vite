@@ -1,24 +1,24 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { Selector } from 'react-redux';
 
 import { RootState } from '../store';
 import prompts from '../constants/prompts.json';
 
 const undoneFilter = (p: Prompt) => !p.done;
 const doneFilter = (p: Prompt) => p.done;
+const selectPrompts = (state: RootState) => state.prompts;
 
-export const selectPrompts = createSelector(
-  (state: RootState) => state.prompts,
-  (app) => app.prompts,
+export const selectPromptByIndex = (
+  index: number,
+): Selector<RootState, Prompt | undefined> =>
+  createSelector(selectPrompts, (app) => app.prompts[index]);
+
+export const selectCurrentPrompt = createSelector(selectPrompts, (app) =>
+  app.prompts.find(undoneFilter),
 );
 
-export const selectCurrentPrompt = createSelector(
-  (state: RootState) => state.prompts,
-  (app) => app.prompts.find(undoneFilter),
-);
-
-export const selectDonePrompts = createSelector(
-  (state: RootState) => state.prompts,
-  (app) => app.prompts.filter(doneFilter),
+export const selectDonePrompts = createSelector(selectPrompts, (app) =>
+  app.prompts.filter(doneFilter),
 );
 
 export interface Prompt {

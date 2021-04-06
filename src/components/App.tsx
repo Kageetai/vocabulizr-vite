@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route } from 'wouter';
+import { Redirect, Route } from 'wouter';
 
 import { LabelAnnotation } from '../api';
 import {
@@ -18,20 +18,13 @@ import DoneView from './DoneView';
 function App(): JSX.Element {
   const currentPrompt = useSelector(selectCurrentPrompt);
   const donePrompts = useSelector(selectDonePrompts);
-  const [labels, setLabels] = useState<LabelAnnotation[]>([]);
   const dispatch = useDispatch();
 
-  const labelsInPrompt = !!labels.filter((l) =>
-    currentPrompt?.accepted.includes(l.description.toLowerCase()),
-  ).length;
-  const hasLabels = !!labels.length;
-
-  const debug = new URLSearchParams(location.search).has('debug');
-  const labelsList = labels.map((l) => l.description).join(',');
+  // const debug = new URLSearchParams(location.search).has('debug');
+  // const labelsList = labels.map((l) => l.description).join(',');
 
   const onNext = () => {
     dispatch(markCurrentAsDone());
-    setLabels([]);
   };
 
   return (
@@ -39,24 +32,30 @@ function App(): JSX.Element {
       <div className="max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
         <Header hasDonePrompts={!!donePrompts.length} />
 
-        {currentPrompt && (
-          <>
-            {!labelsInPrompt && (
-              <PromptView
-                currentPrompt={currentPrompt}
-                onSetLabels={setLabels}
-              />
-            )}
+        <Route path="/">
+          <Redirect to="/0" />
+        </Route>
 
-            {hasLabels && !labelsInPrompt && <h2>Wrong! Try again!</h2>}
+        <Route path="/:index">
+          {(params) => <PromptView index={parseInt(params.index || '0', 10)} />}
+        </Route>
 
-            {labelsInPrompt && (
-              <ResultView currentPrompt={currentPrompt} onNext={onNext} />
-            )}
-          </>
-        )}
+        {/*{currentPrompt && (*/}
+        {/*  <>*/}
+        {/*    {!labelsInPrompt && (*/}
+        {/*      <PromptView*/}
+        {/*        currentPrompt={currentPrompt}*/}
+        {/*        onSetLabels={setLabels}*/}
+        {/*      />*/}
+        {/*    )}*/}
 
-        {debug && labelsList}
+        {/*    {hasLabels && !labelsInPrompt && <h2>Wrong! Try again!</h2>}*/}
+
+        {/*    {labelsInPrompt && (*/}
+        {/*      <ResultView currentPrompt={currentPrompt} onNext={onNext} />*/}
+        {/*    )}*/}
+        {/*  </>*/}
+        {/*)}*/}
 
         {!currentPrompt && donePrompts.length && (
           <DoneView totalPromptsCount={donePrompts.length} />
