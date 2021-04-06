@@ -36,7 +36,7 @@ function App(): JSX.Element {
   return (
     <div className="h-screen bg-gray-50">
       <div className="max-w-125 mx-auto px-4 flex flex-col items-stretch text-center">
-        <Header />
+        <Header hasDonePrompts={!!donePrompts.length} />
 
         {currentPrompt && (
           <>

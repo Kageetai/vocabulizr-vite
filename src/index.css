@@ -2,13 +2,15 @@
   font-family: Leitura News;
   font-style: normal;
   font-weight: 700;
-  src: url('/LeituraNews-Roman4.woff2') format('woff2'), url('/LeituraNews-Roman4.woff') format('woff');
+  src: url('/LeituraNews-Roman4.woff2') format('woff2'),
+    url('/LeituraNews-Roman4.woff') format('woff');
 }
 @font-face {
   font-family: Babbel Milliard;
   font-style: normal;
   font-weight: 400;
-  src: url('/Milliard-Book.woff2') format('woff2'), url('/Milliard-Book.woff') format('woff');
+  src: url('/Milliard-Book.woff2') format('woff2'),
+    url('/Milliard-Book.woff') format('woff');
 }
 
 @tailwind base;
@@ -49,6 +51,14 @@
   button.primary {
     @apply rounded px-4 py-1 text-white min-w-min;
     min-width: 100px;
+  }
+
+  button.clean {
+    @apply rounded-none bg-transparent text-current min-w-min;
+  }
+
+  button[disabled] {
+    @apply opacity-50;
   }
 }
 
