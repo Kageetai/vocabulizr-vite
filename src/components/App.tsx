@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Route } from 'wouter';
 
 import { LabelAnnotation } from '../api';
 import {
@@ -61,7 +62,7 @@ function App(): JSX.Element {
           <DoneView totalPromptsCount={donePrompts.length} />
         )}
 
-        <Printer donePrompts={donePrompts} />
+        <Route path="/all" component={Printer} />
       </div>
     </div>
   );
