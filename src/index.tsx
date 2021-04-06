@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import ReactGA from 'react-ga';
+import TagManager from 'react-gtm-module';
 
 import App from './components/App';
 import './index.css';
 import store from './store';
 import './utils/array';
 
-ReactGA.initialize(import.meta.env.VITE_GA_ID as string);
-ReactGA.pageview(window.location.pathname + window.location.search);
+TagManager.initialize({
+  gtmId: import.meta.env.VITE_GTM_ID as string,
+});
 
 ReactDOM.render(
   <React.StrictMode>
