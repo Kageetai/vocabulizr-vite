@@ -1,6 +1,6 @@
 [
   {
-    "word": "egg",
+    "word": "huevo",
     "phrase": "\"¿Qué le dice el huevo a la sartén?\" \"¡Me tienes FRITO!\"",
     "hint": "a round breakfast favorite that chickens make. ",
     "accepted": [
@@ -18,6 +18,7 @@
     "hint": "the object you put on your foot before you go out the door.",
     "accepted": [
       "shoe",
+      "outdoor shoe",
       "foot",
       "footwear"
     ],
@@ -32,6 +33,7 @@
     "accepted": [
       "glass",
       "cup",
+      "tableware",
       "dish"
     ],
     "translation": "Drown in a glass of water.",
@@ -57,8 +59,9 @@
     "hint": "an object with four teeth that you use to eat spaghetti.",
     "accepted": [
       "fork",
+      "tableware",
       "silverware",
-      "utensil"
+      "kitchen utensil"
     ],
     "translation": "The fork says to the spoon: \"Spoon! Spoon!\" And the knife says: \"Oh! It looks like like it doesn't hear you.\"",
     "explanation": "es = \"to be\" cuchara = \"spoon\" es+cuchara = \"to hear\" ",
