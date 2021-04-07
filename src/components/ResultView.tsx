@@ -4,7 +4,7 @@ import { Link, Redirect } from 'wouter';
 
 import { selectPromptByIndex, selectPromptLength } from '../reducers/prompts';
 
-import PromptImage from './PromptImage';
+import Printer from './Printer';
 
 interface Props {
   index: number;
@@ -22,29 +22,23 @@ function ResultView({ index }: Props): JSX.Element {
 
   return (
     <div>
-      <h1>¡Correcto!</h1>
+      <h2>¡Correcto!</h2>
 
-      <div className="border-box flex items-center text-left">
-        <PromptImage p={currentPrompt} />
-
-        <div>
-          <h3 className="mt-1">The Phrase</h3>
-
-          <p>{currentPrompt.phrase}</p>
-        </div>
+      <div className="my-4">
+        <Printer prompt={currentPrompt} />
       </div>
 
-      <p className="my-4 italic">&quot;{currentPrompt.explanation}&quot;</p>
+      <div className="mt-16">
+        <p className="mb-4">
+          <Link href={nextRoute}>
+            <button className="primary">Next phrase</button>
+          </Link>
+        </p>
 
-      <p className="my-2">
-        <Link href={nextRoute}>
-          <button className="primary">Next phrase</button>
+        <Link href="/end">
+          <button className="clean">End</button>
         </Link>
-      </p>
-
-      <Link href="/end">
-        <button className="clean">End</button>
-      </Link>
+      </div>
     </div>
   );
 }

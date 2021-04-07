@@ -21,7 +21,7 @@ function EndView(): JSX.Element {
 
   return (
     <div>
-      <h2>All my words</h2>
+      <h2>¡Felicidades!</h2>
 
       <div className="my-4">
         <Printer prompt={donePrompts[index]} />
