@@ -26,6 +26,8 @@ export const selectPromptLength = createSelector(
   (app) => app.prompts.length,
 );
 
+export const selectDebug = createSelector(selectPrompts, (app) => app.debug);
+
 export interface Prompt {
   word: string;
   phrase: string;
@@ -39,10 +41,12 @@ export interface Prompt {
 
 export interface State {
   prompts: Prompt[];
+  debug: boolean;
 }
 
 const initialState: State = {
   prompts,
+  debug: false,
 };
 
 const promptsSlice = createSlice({
@@ -61,9 +65,17 @@ const promptsSlice = createSlice({
     reset: () => {
       return initialState;
     },
+    activateDebug: (state) => {
+      state.debug = true;
+    },
   },
 });
 
-export const { markPromptAsDone, saveScreenshot, reset } = promptsSlice.actions;
+export const {
+  markPromptAsDone,
+  saveScreenshot,
+  reset,
+  activateDebug,
+} = promptsSlice.actions;
 
 export default promptsSlice.reducer;

@@ -7,6 +7,7 @@ import { LabelAnnotation, postImage } from '../api';
 import {
   markPromptAsDone,
   saveScreenshot,
+  selectDebug,
   selectPromptByIndex,
   selectPromptLength,
 } from '../reducers/prompts';
@@ -19,6 +20,7 @@ interface Props {
 }
 
 function PromptView({ index }: Props): JSX.Element {
+  const isDebug = useSelector(selectDebug);
   const currentPrompt = useSelector(selectPromptByIndex(index));
   const promptsLength = useSelector(selectPromptLength);
   const dispatch = useDispatch();
@@ -48,7 +50,6 @@ function PromptView({ index }: Props): JSX.Element {
     currentPrompt?.accepted.includes(l.description.toLowerCase()),
   ).length;
   const hasLabels = !!labels.length;
-  const debug = new URLSearchParams(location.search).has('debug');
   const labelsList = labels.map((l) => l.description).join(', ');
   const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
 
@@ -89,7 +90,7 @@ function PromptView({ index }: Props): JSX.Element {
         onSuccess={onSuccess}
       />
 
-      {debug && labelsList}
+      {isDebug && labelsList}
 
       <Link href={nextRoute}>
         <small>Skip</small>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'wouter';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectUndoneIndex } from '../reducers/prompts';
+import { activateDebug, selectUndoneIndex } from '../reducers/prompts';
 
 import Header from './Header';
 import PromptView from './PromptView';
@@ -11,6 +11,13 @@ import EndView from './EndView';
 
 function App(): JSX.Element {
   const undoneIndex = useSelector(selectUndoneIndex);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (new URLSearchParams(location.search).has('debug')) {
+      dispatch(activateDebug());
+    }
+  }, []);
 
   return (
     <div className="h-screen bg-gray-50">
