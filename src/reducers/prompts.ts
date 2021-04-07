@@ -33,6 +33,7 @@ export interface Prompt {
   accepted: string[];
   explanation: string;
   done: boolean;
+  image?: string;
 }
 
 export interface State {
@@ -50,12 +51,18 @@ const promptsSlice = createSlice({
     markPromptAsDone: (state, action: PayloadAction<number>) => {
       state.prompts[action.payload].done = true;
     },
-    reset: (state) => {
-      state.prompts.forEach((p) => (p.done = false));
+    saveScreenshot: (
+      state,
+      action: PayloadAction<{ index: number; imageSrc: string }>,
+    ) => {
+      state.prompts[action.payload.index].image = action.payload.imageSrc;
+    },
+    reset: () => {
+      return initialState;
     },
   },
 });
 
-export const { markPromptAsDone, reset } = promptsSlice.actions;
+export const { markPromptAsDone, saveScreenshot, reset } = promptsSlice.actions;
 
 export default promptsSlice.reducer;

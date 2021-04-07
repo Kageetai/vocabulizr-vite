@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SuccessMessage from './SuccessMessage';
+
 interface Props {
   label?: string;
   hasLabels: boolean;
@@ -13,12 +15,6 @@ function PromptView({
   labelsInPrompt,
   onSuccess,
 }: Props): JSX.Element {
-  React.useEffect(() => {
-    if (success) {
-      onSuccess();
-    }
-  }, []);
-
   const failure = hasLabels && !labelsInPrompt;
   const success = hasLabels && labelsInPrompt;
 
@@ -43,7 +39,7 @@ function PromptView({
       </div>
 
       <div className="ml-auto text-2xl">
-        {success && <p className="text-4xl text-green-500">✓</p>}
+        {success && <SuccessMessage onSuccess={onSuccess} />}
         {failure && <p>❌</p>}
       </div>
     </div>

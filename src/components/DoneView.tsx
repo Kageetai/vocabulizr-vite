@@ -27,7 +27,7 @@ function DoneView(): JSX.Element {
       {!!donePrompts.length && <Printer />}
 
       <button className="clean" onClick={onRestart}>
-        Restart
+        <small>Restart</small>
       </button>
 
       {import.meta.env.VITE_GOOGLE_FORM_EMBED_URL && (

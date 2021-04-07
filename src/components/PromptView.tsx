@@ -6,6 +6,7 @@ import useLocation from 'wouter/use-location';
 import { LabelAnnotation, postImage } from '../api';
 import {
   markPromptAsDone,
+  saveScreenshot,
   selectPromptByIndex,
   selectPromptLength,
 } from '../reducers/prompts';
@@ -32,13 +33,14 @@ function PromptView({ index }: Props): JSX.Element {
 
   const onCapture = (imageSrc: string) => {
     postImage(imageSrc).then(setLabels);
+    dispatch(saveScreenshot({ index, imageSrc }));
   };
 
   const onSuccess = () => {
     setTimeout(() => {
       setLabels([]);
       dispatch(markPromptAsDone(index));
-      setLocation(nextRoute + '/success');
+      setLocation(index + '/success');
     }, 1000);
   };
 
@@ -74,7 +76,7 @@ function PromptView({ index }: Props): JSX.Element {
 
       <p className="leading-none">
         <small>
-          {index} / {promptsLength}
+          {index + 1} / {promptsLength}
         </small>
       </p>
 
