@@ -1,18 +1,67 @@
 [
   {
-    "word": "plato",
-    "phrase": "Pagar los platos rotos",
-    "hint": "Take a photo of a circular object you eat off of.",
-    "accepted": ["plate", "porcelain", "ceramics", "tableware", "dishware", "serveware"],
-    "explanation": "it's a plate!",
+    "word": "egg",
+    "phrase": "\"¿Qué le dice el huevo a la sartén?\" \"¡Me tienes FRITO!\"",
+    "hint": "a round breakfast favorite that chickens make. ",
+    "accepted": [
+      "egg",
+      "pan",
+      "circle"
+    ],
+    "translation": "\"What does the egg say to the pan?\" \"You have me fried!\"",
+    "explanation": "You have me fried can also mean you have me annoyed and fed up. ",
     "done": false
   },
   {
-    "word": "egg",
-    "phrase": "\"¿Qué le dice el huevo a la sartén?\" \"Me tienes FRITO\"",
-    "hint": "What is the most typical white breakfast food?",
-    "accepted": ["egg", "pan", "circle"],
-    "explanation": "an egg",
+    "word": "zapato",
+    "phrase": "\"¿Qué le dice un zapato a otro zapato?\" \"Que vida tan arrastrada.\"",
+    "hint": "the object you put on your foot before you go out the door.",
+    "accepted": [
+      "shoe",
+      "foot",
+      "footwear"
+    ],
+    "translation": "\"What does one shoe say to another shoe?\" \"What a dragged life.\"",
+    "explanation": "Sure, you might drag your feet (and your shoes). A dragged life also means a miserable life.",
+    "done": false
+  },
+  {
+    "word": "vaso",
+    "phrase": "Ahogarse en un vaso de agua",
+    "hint": "a common household object to hold a drink. ",
+    "accepted": [
+      "glass",
+      "cup",
+      "dish"
+    ],
+    "translation": "Drown in a glass of water.",
+    "explanation": "To make a big deal out of something small. ",
+    "done": false
+  },
+  {
+    "word": "tomate",
+    "phrase": "¿Cuál es el colmo de un tomate? Hablar en público y ponerse colorado...",
+    "hint": "a round red vegetable used in salads and hamburguers.",
+    "accepted": [
+      "tomato",
+      "fruit",
+      "food"
+    ],
+    "translation": "What's the end point for a tomato? To speak in public and turn red.",
+    "explanation": "The end point (colmo) is a double meaning of the most a tomato could tolerate (the embarassment of public speaking) and also when you know a tomate is ripe (when it turns red).",
+    "done": false
+  },
+  {
+    "word": "tenedor",
+    "phrase": "El tenedor le dice a la cuchara: \"¡Cuchara, cuchara!\" Y el cuchillo dice: \"¡Oh! parece que no escuchara.\"",
+    "hint": "an object with four teeth that you use to eat spaghetti.",
+    "accepted": [
+      "fork",
+      "silverware",
+      "utensil"
+    ],
+    "translation": "The fork says to the spoon: \"Spoon! Spoon!\" And the knife says: \"Oh! It looks like like it doesn't hear you.\"",
+    "explanation": "es = \"to be\" cuchara = \"spoon\" es+cuchara = \"to hear\" ",
     "done": false
   }
 ]
