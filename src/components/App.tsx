@@ -11,7 +11,6 @@ import EndView from './EndView';
 
 function App(): JSX.Element {
   const undoneIndex = useSelector(selectUndoneIndex);
-  console.log(undoneIndex);
 
   return (
     <div className="h-screen bg-gray-50">
@@ -20,7 +19,7 @@ function App(): JSX.Element {
 
         <Switch>
           <Route path="/">
-            <Redirect to={`/${undoneIndex}`} />
+            <Redirect to={`/${undoneIndex >= 0 ? undoneIndex : 'end'}`} />
           </Route>
 
           <Route path="/end" component={EndView} />
