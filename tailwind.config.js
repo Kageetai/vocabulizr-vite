@@ -11,6 +11,7 @@ module.exports = {
         primary: 'var(--primary)',
         'primary-75': 'var(--primary-75)',
         border: 'var(--darkBlue)',
+        clean: 'var(--clean)',
       },
       transitionProperty: {
         'max-h': 'max-height',

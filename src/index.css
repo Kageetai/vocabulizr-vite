@@ -24,6 +24,7 @@
     --primary: rgba(255, 121, 15, 1);
     --primary-75: rgba(255, 121, 15, .75);
     --darkBlue: #0F293C;
+    --clean: #284B7C;
   }
 
   h1,
@@ -58,7 +59,7 @@
   }
 
   button.clean {
-    @apply rounded-none bg-transparent text-current min-w-min;
+    @apply rounded-none bg-transparent min-w-min text-clean;
   }
 
   button[disabled] {

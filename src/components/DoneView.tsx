@@ -18,7 +18,7 @@ function DoneView(): JSX.Element {
 
   return (
     <div>
-      <h1>¡Felicidades!</h1>
+      <h1>All my words</h1>
 
       <p className="my-2 p-2">
         You found {donePrompts.length} words and sayings!
@@ -27,7 +27,7 @@ function DoneView(): JSX.Element {
       {!!donePrompts.length && <Printer />}
 
       <button className="clean" onClick={onRestart}>
-        <small>Restart</small>
+        Play again
       </button>
 
       {import.meta.env.VITE_GOOGLE_FORM_EMBED_URL && (

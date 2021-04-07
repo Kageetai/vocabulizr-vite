@@ -38,15 +38,13 @@ function ResultView({ index }: Props): JSX.Element {
 
       <p className="my-2">
         <Link href={nextRoute}>
-          <button className="primary">Next</button>
+          <button className="primary">Next phrase</button>
         </Link>
       </p>
 
-      <small>
-        <Link href="/end">
-          <button className="clean">End</button>
-        </Link>
-      </small>
+      <Link href="/end">
+        <button className="clean">End</button>
+      </Link>
     </div>
   );
 }
