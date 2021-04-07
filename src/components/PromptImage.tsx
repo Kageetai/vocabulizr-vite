@@ -7,7 +7,7 @@ interface Props {
 }
 
 function PromptImage({ p }: Props): JSX.Element | null {
-  if (!p) {
+  if (!p?.image) {
     return null;
   }
 

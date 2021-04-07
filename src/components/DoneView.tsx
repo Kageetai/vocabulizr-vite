@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'wouter';
 
@@ -10,39 +10,76 @@ function DoneView(): JSX.Element {
   const donePrompts = useSelector(selectDonePrompts);
   const dispatch = useDispatch();
   const [_, setLocation] = useLocation();
+  const [index, setIndex] = useState(0);
 
   const onRestart = () => {
     dispatch(reset());
     setLocation('/');
   };
 
+  const length = donePrompts.length;
+
   return (
     <div>
-      <h1>All my words</h1>
+      <h2>All my words</h2>
 
-      <p className="my-2 p-2">
-        You found {donePrompts.length} words and sayings!
-      </p>
+      <div className="my-4">
+        <Printer prompt={donePrompts[index]} />
 
-      {!!donePrompts.length && <Printer />}
+        {!!length && (
+          <div className="flex justify-center mt-4">
+            <button
+              disabled={index < 1}
+              onClick={() => setIndex(index - 1)}
+              className="clean mr-2"
+            >
+              <img src="/arrow-left.svg" alt="previous" />
+            </button>
+            {index + 1} / {length}
+            <button
+              disabled={index >= length - 1}
+              onClick={() => setIndex(index + 1)}
+              className="clean ml-2"
+            >
+              <img src="/arrow-right.svg" alt="next" />
+            </button>
+          </div>
+        )}
+      </div>
 
-      <button className="clean" onClick={onRestart}>
-        Play again
-      </button>
+      <div className="mt-16">
+        {import.meta.env.VITE_GOOGLE_FORM_URL && (
+          <p className="mb-4">
+            <a
+              href={import.meta.env.VITE_GOOGLE_FORM_URL as string}
+              className="primary"
+            >
+              Feedback
+            </a>
+          </p>
+        )}
 
-      {import.meta.env.VITE_GOOGLE_FORM_EMBED_URL && (
-        <iframe
-          className="max-w-full max-h-screen mt-16"
-          src={import.meta.env.VITE_GOOGLE_FORM_EMBED_URL as string}
-          width="640"
-          height="489"
-          frameBorder="0"
-          marginHeight={0}
-          marginWidth={0}
-        >
-          Loading…
-        </iframe>
-      )}
+        <p>
+          <button className="clean" onClick={onRestart}>
+            Play again
+          </button>
+        </p>
+
+        <h3>¡Muchas gracias!</h3>
+
+        <p>
+          We loved making this learning experience for you. If you have other
+          comments, suggestions, or thoughts about Buscamara, we&apos;d love to
+          here from you in{' '}
+          <a
+            className="text-primary hover:underline"
+            href="https://www.facebook.com/groups/babbelexploradores"
+          >
+            Exploradores
+          </a>
+          .
+        </p>
+      </div>
     </div>
   );
 }

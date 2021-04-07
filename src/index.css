@@ -50,11 +50,11 @@
   }
 
   button {
-    background-color: var(--primary);
+    @apply text-clean bg-primary;
   }
 
-  button.primary {
-    @apply rounded px-4 py-1 text-white min-w-min;
+  a.primary, button.primary {
+    @apply inline-block bg-primary rounded px-6 py-2 text-white min-w-min;
     min-width: 100px;
   }
 
@@ -82,6 +82,10 @@
 
   .text-primary {
     color: var(--primary);
+  }
+
+  .min-h-60 {
+    min-height: 15rem;
   }
 
   .min-h-1rem {

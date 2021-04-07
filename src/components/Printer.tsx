@@ -1,25 +1,48 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-import { selectDonePrompts } from '../reducers/prompts';
+import { Prompt } from '../reducers/prompts';
 
 import PromptImage from './PromptImage';
 
-function Printer(): JSX.Element {
-  const donePrompts = useSelector(selectDonePrompts);
+interface Props {
+  prompt: Prompt;
+}
+
+function Printer({ prompt }: Props): JSX.Element {
+  if (!prompt) {
+    return (
+      <div className="border-box flex flex-col justify-center min-h-60 text-gray-400 italic">
+        <span>No words yet</span>
+      </div>
+    );
+  }
 
   return (
-    <ul className="border-box">
-      {donePrompts.map((p) => (
-        <li key={p.word} className="my-2">
-          <div className="flex items-center text-left">
-            <PromptImage p={p} />
+    <div className="border-box text-left min-h-60">
+      <div className="flex items-center mb-4 mt-2">
+        <img src="/bookmark.svg" alt="Bookmark" className="mr-4" />
 
-            {p.phrase}
-          </div>
-        </li>
-      ))}
-    </ul>
+        <h3 className="m-0">{prompt.word}</h3>
+
+        <span className="ml-auto -mr-4">
+          <PromptImage p={prompt} />
+        </span>
+      </div>
+
+      <p className="text-primary">{prompt.phrase}</p>
+
+      <p className="mt-2 leading-none">
+        <small>Meaning</small>
+      </p>
+
+      <p>{prompt.translation}</p>
+
+      <p className="mt-2 leading-none">
+        <small>Explanation</small>
+      </p>
+
+      <p>{prompt.explanation}</p>
+    </div>
   );
 }
 
