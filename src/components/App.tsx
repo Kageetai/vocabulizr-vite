@@ -7,7 +7,7 @@ import { selectUndoneIndex } from '../reducers/prompts';
 import Header from './Header';
 import PromptView from './PromptView';
 import ResultView from './ResultView';
-import DoneView from './DoneView';
+import EndView from './EndView';
 
 function App(): JSX.Element {
   const undoneIndex = useSelector(selectUndoneIndex);
@@ -23,7 +23,7 @@ function App(): JSX.Element {
             <Redirect to={`/${undoneIndex}`} />
           </Route>
 
-          <Route path="/end" component={DoneView} />
+          <Route path="/end" component={EndView} />
 
           <Route path="/:index">
             {(params) => <PromptView index={parseInt(params.index, 10)} />}

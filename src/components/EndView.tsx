@@ -6,7 +6,7 @@ import { reset, selectDonePrompts } from '../reducers/prompts';
 
 import Printer from './Printer';
 
-function DoneView(): JSX.Element {
+function EndView(): JSX.Element {
   const donePrompts = useSelector(selectDonePrompts);
   const dispatch = useDispatch();
   const [_, setLocation] = useLocation();
@@ -84,4 +84,4 @@ function DoneView(): JSX.Element {
   );
 }
 
-export default DoneView;
+export default EndView;
