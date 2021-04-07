@@ -23,7 +23,7 @@
 
     --primary: rgba(255, 121, 15, 1);
     --primary-75: rgba(255, 121, 15, .75);
-    --border: #0F293C;
+    --darkBlue: #0F293C;
   }
 
   h1,
@@ -81,6 +81,10 @@
 
   .text-primary {
     color: var(--primary);
+  }
+
+  .min-h-1rem {
+    min-height: 1rem;
   }
 }
 

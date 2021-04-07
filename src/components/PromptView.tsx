@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'wouter';
 import useLocation from 'wouter/use-location';
@@ -22,7 +22,13 @@ function PromptView({ index }: Props): JSX.Element {
   const promptsLength = useSelector(selectPromptLength);
   const dispatch = useDispatch();
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
+  const [isPromptTimedOut, setPromptTimedOut] = useState<boolean>(false);
   const [_, setLocation] = useLocation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setPromptTimedOut(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const onCapture = (imageSrc: string) => {
     postImage(imageSrc).then(setLabels);
@@ -51,33 +57,35 @@ function PromptView({ index }: Props): JSX.Element {
   return (
     <div>
       <div className="border-box flex items-center text-left">
-        <div className="w-16 mr-4">
-          <img src="/camera.png" alt="Camera" />
+        <div className="w-11 mr-4">
+          <img src="/camera.svg" alt="Camera" />
         </div>
 
         <div>
-          <small>Take a photo of...</small>
+          <p className="leading-none">
+            <small>Take a photo of...</small>
+          </p>
 
           <h3 className="mt-1 leading-6 font-sans text-primary">
-            {currentPrompt.hint}
+            {isPromptTimedOut ? currentPrompt.hint : '...'}
           </h3>
         </div>
       </div>
 
-      <small>
-        {index} / {promptsLength}
-      </small>
+      <p className="leading-none">
+        <small>
+          {index} / {promptsLength}
+        </small>
+      </p>
 
       <CameraBox onCapture={onCapture} />
 
-      {hasLabels && (
-        <ResultBox
-          label={labels[0].description}
-          hasLabels={hasLabels}
-          labelsInPrompt={labelsInPrompt}
-          onSuccess={onSuccess}
-        />
-      )}
+      <ResultBox
+        label={labels[0]?.description}
+        hasLabels={hasLabels}
+        labelsInPrompt={labelsInPrompt}
+        onSuccess={onSuccess}
+      />
 
       {debug && labelsList}
 

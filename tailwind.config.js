@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         primary: 'var(--primary)',
         'primary-75': 'var(--primary-75)',
-        border: 'var(--border)',
+        border: 'var(--darkBlue)',
       },
       transitionProperty: {
         'max-h': 'max-height',

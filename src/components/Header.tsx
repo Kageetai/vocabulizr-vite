@@ -30,7 +30,7 @@ function Header(): JSX.Element {
             className="clean absolute top-4 right-0"
             disabled={!hasDonePrompts}
           >
-            <img src="/scroll.png" alt="scroll" />
+            <img src="/hamburger.svg" alt="scroll" />
           </button>
         </Link>
       )}
