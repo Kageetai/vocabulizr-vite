@@ -24,11 +24,25 @@ function DoneView(): JSX.Element {
         You found {donePrompts.length} words and sayings!
       </p>
 
-      <Printer />
+      {!!donePrompts.length && <Printer />}
 
       <button className="clean" onClick={onRestart}>
         Restart
       </button>
+
+      {import.meta.env.VITE_GOOGLE_FORM_EMBED_URL && (
+        <iframe
+          className="max-w-full max-h-screen mt-16"
+          src={import.meta.env.VITE_GOOGLE_FORM_EMBED_URL as string}
+          width="640"
+          height="489"
+          frameBorder="0"
+          marginHeight={0}
+          marginWidth={0}
+        >
+          Loading…
+        </iframe>
+      )}
     </div>
   );
 }
