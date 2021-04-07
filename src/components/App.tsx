@@ -7,7 +7,6 @@ import { selectUndoneIndex } from '../reducers/prompts';
 import Header from './Header';
 import PromptView from './PromptView';
 import ResultView from './ResultView';
-import Printer from './Printer';
 import DoneView from './DoneView';
 
 function App(): JSX.Element {
@@ -23,8 +22,6 @@ function App(): JSX.Element {
           <Route path="/">
             <Redirect to={`/${undoneIndex}`} />
           </Route>
-
-          <Route path="/all" component={Printer} />
 
           <Route path="/end" component={DoneView} />
 
