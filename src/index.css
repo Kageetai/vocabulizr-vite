@@ -123,6 +123,12 @@
 
     border-width: 0 32px 32px 0;
     border-color: transparent var(--primary-75) transparent transparent;
+
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .cameraCaptureButton:focus:not(:focus-visible) {
+    outline: none;
   }
 
   .border-box {
