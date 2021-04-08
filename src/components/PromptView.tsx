@@ -80,19 +80,25 @@ function PromptView({ index }: Props): JSX.Element {
         </div>
       </div>
 
-      <p className="leading-1 -my-2 text-xl">
-        {Array.from({ length: promptsLength }, (_, i) => (
-          <Link key={i} href={`/${i}`}>
-            <span
-              className={`mx-1 ${
-                index === i ? 'text-primary' : 'text-gray-400'
-              }`}
-            >
-              &bull;
-            </span>
+      <div className="flex items-center justify-center">
+        {index > 0 ? (
+          <Link href={`/${index - 1}`}>
+            <img src="/arrow-left.svg" alt="previous" />
           </Link>
-        ))}
-      </p>
+        ) : (
+          <span className="w-6">&nbsp;</span>
+        )}
+
+        <small>
+          {index + 1} / {promptsLength}
+        </small>
+
+        {index < promptsLength && (
+          <Link href={`/${index + 1}`}>
+            <img src="/arrow-right.svg" alt="next" />
+          </Link>
+        )}
+      </div>
 
       <CameraBox onCapture={onCapture} />
 
