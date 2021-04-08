@@ -6,6 +6,7 @@ interface Props {
   label?: string;
   hasLabels: boolean;
   labelsInPrompt: boolean;
+  captureCount: number;
   onSuccess: () => void;
 }
 
@@ -13,10 +14,13 @@ function PromptView({
   label,
   hasLabels,
   labelsInPrompt,
+  captureCount,
   onSuccess,
 }: Props): JSX.Element {
   const failure = hasLabels && !labelsInPrompt;
   const success = hasLabels && labelsInPrompt;
+
+  console.log(captureCount);
 
   return (
     <>
@@ -25,8 +29,8 @@ function PromptView({
           !hasLabels && `opacity-50`
         }`}
       >
-        <div className="w-11 mr-4">
-          <img src="/lens.svg" alt="Camera" />
+        <div className="w-11 mr-4 flex-shrink-0">
+          <img src="/lens.svg" alt="Lens" />
         </div>
 
         <div>
@@ -34,7 +38,7 @@ function PromptView({
             <small>Recognized as...</small>
           </p>
 
-          <h3 className="mt-1 leading-6 min-h-1rem leading-4 font-sans text-primary">
+          <h3 className="mt-1 leading-6 min-h-1rem font-sans text-primary">
             {label || '...'}
           </h3>
         </div>
@@ -46,7 +50,11 @@ function PromptView({
       </div>
 
       {success && <p className="text-green-500">That&apos;s correct!</p>}
-      {failure && <p className="text-red-500">Try again!</p>}
+      {failure && (
+        <p className="text-red-500">
+          {captureCount % 2 === 0 ? 'Try again!' : 'Give it another try!'}
+        </p>
+      )}
     </>
   );
 }

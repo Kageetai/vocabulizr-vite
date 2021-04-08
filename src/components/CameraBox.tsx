@@ -45,12 +45,13 @@ function PromptView({ onCapture }: Props): JSX.Element {
   const hasSeveralCameras = devices.length > 1;
 
   return (
-    <div className="relative max-w-full w-125 max-h-125 my-6 rounded-xl overflow-hidden">
-      <span className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -z-1">
+    <div className="cameraBox relative">
+      <p className="absolute top-1/3 left-1/2 transform -translate-x-1/2">
         Please allow us to use your device camera!
-      </span>
+      </p>
 
       <Webcam
+        className="relative"
         width={500}
         height={500}
         mirrored={
@@ -65,7 +66,7 @@ function PromptView({ onCapture }: Props): JSX.Element {
 
       {devices.length && (
         <button
-          className="opacity-75 hover:opacity-90 w-16 h-16 rounded-full focus:ring absolute bottom-2 left-1/2 transform -translate-x-1/2"
+          className="cameraCaptureButton absolute bottom-2 left-1/2 transform -translate-x-1/2"
           onClick={capture}
           aria-label="Capture image"
         >

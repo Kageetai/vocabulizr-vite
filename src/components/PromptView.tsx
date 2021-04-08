@@ -26,6 +26,7 @@ function PromptView({ index }: Props): JSX.Element {
   const dispatch = useDispatch();
   const [labels, setLabels] = useState<LabelAnnotation[]>([]);
   const [isPromptTimedOut, setPromptTimedOut] = useState<boolean>(false);
+  const [captureCount, setCaptureCount] = useState(0);
   const [_, setLocation] = useLocation();
 
   useEffect(() => {
@@ -36,6 +37,7 @@ function PromptView({ index }: Props): JSX.Element {
   const onCapture = (imageSrc: string) => {
     postImage(imageSrc).then(setLabels);
     dispatch(saveScreenshot({ index, imageSrc }));
+    setCaptureCount((c) => c + 1);
   };
 
   const onSuccess = () => {
@@ -51,7 +53,7 @@ function PromptView({ index }: Props): JSX.Element {
   ).length;
   const hasLabels = !!labels.length;
   const labelsList = labels.map((l) => l.description).join(', ');
-  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
+  // const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
 
   if (!currentPrompt) {
     return <Redirect to="/" />;
@@ -59,8 +61,10 @@ function PromptView({ index }: Props): JSX.Element {
 
   return (
     <div>
+      <h2>&nbsp;</h2>
+
       <div className="border-box flex items-center text-left">
-        <div className="w-11 mr-4">
+        <div className="w-11 mr-4 flex-shrink-0">
           <img src="/camera.svg" alt="Camera" />
         </div>
 
@@ -69,16 +73,24 @@ function PromptView({ index }: Props): JSX.Element {
             <small>Take a photo of...</small>
           </p>
 
-          <h3 className="mt-1 leading-6 font-sans text-primary">
+          <h3 className="mt-1 leading-6 min-h-1rem font-sans text-primary">
             {isPromptTimedOut ? currentPrompt.hint : '...'}
           </h3>
         </div>
       </div>
 
-      <p className="leading-none">
-        <small>
-          {index + 1} / {promptsLength}
-        </small>
+      <p className="leading-1 -mt-2 text-xl">
+        {Array.from({ length: promptsLength }, (_, i) => (
+          <Link key={i} href={`/${i}`}>
+            <span
+              className={`mx-1 ${
+                index === i ? 'text-primary' : 'text-gray-400'
+              }`}
+            >
+              &bull;
+            </span>
+          </Link>
+        ))}
       </p>
 
       <CameraBox onCapture={onCapture} />
@@ -87,14 +99,15 @@ function PromptView({ index }: Props): JSX.Element {
         label={labels[0]?.description}
         hasLabels={hasLabels}
         labelsInPrompt={labelsInPrompt}
+        captureCount={captureCount}
         onSuccess={onSuccess}
       />
 
       {isDebug && labelsList}
 
-      <Link href={nextRoute}>
-        <small>Skip</small>
-      </Link>
+      {/*<Link href={nextRoute}>*/}
+      {/*  <small>Skip</small>*/}
+      {/*</Link>*/}
     </div>
   );
 }

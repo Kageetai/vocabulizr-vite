@@ -47,37 +47,38 @@ function EndView(): JSX.Element {
         )}
       </div>
 
-      <div className="mt-16">
+      <div className="mt-16 space-y-4">
         {import.meta.env.VITE_GOOGLE_FORM_URL && (
-          <p className="mb-4">
-            <a
-              href={import.meta.env.VITE_GOOGLE_FORM_URL as string}
-              className="primary"
-            >
-              Feedback
-            </a>
-          </p>
+          <>
+            <h3>¡Muchas gracias!</h3>
+
+            <p>
+              We&apos;d love to hear how this learning experience was for you!.
+            </p>
+
+            <p className="">
+              <a
+                href={import.meta.env.VITE_GOOGLE_FORM_URL as string}
+                className="primary"
+              >
+                Give Feedback
+              </a>
+            </p>
+          </>
         )}
 
         <p>
-          <button className="clean" onClick={onRestart}>
+          <button
+            className="clean inline-flex justify-center"
+            onClick={onRestart}
+          >
+            <img
+              className="inline-block mr-1"
+              src="/retry.svg"
+              alt="Play again"
+            />
             Play again
           </button>
-        </p>
-
-        <h3>¡Muchas gracias!</h3>
-
-        <p>
-          We loved making this learning experience for you. If you have other
-          comments, suggestions, or thoughts about Buscamara, we&apos;d love to
-          here from you in{' '}
-          <a
-            className="text-primary hover:underline"
-            href="https://www.facebook.com/groups/babbelexploradores"
-          >
-            Exploradores
-          </a>
-          .
         </p>
       </div>
     </div>

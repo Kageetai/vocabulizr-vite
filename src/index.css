@@ -33,8 +33,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Leitura News', sans-serif;
-    margin-top: 1rem;
+    @apply font-serif mt-4 text-darkBlue;
   }
 
   h1 {
@@ -110,6 +109,15 @@
     @apply max-h-96;
   }
 
+  .cameraBox {
+    @apply max-w-full w-125 max-h-125 my-6 overflow-hidden rounded-xl;
+    min-height: calc(100vw - 2rem);
+  }
+
+  .cameraCaptureButton {
+    @apply opacity-75 hover:opacity-90 w-16 h-16 rounded-full;
+  }
+
   .changeCameraButton {
     @apply w-0 h-0 border-solid bg-transparent opacity-75;
 
@@ -118,6 +126,6 @@
   }
 
   .border-box {
-    @apply px-4 py-2 my-2 border-border border-2 rounded-xl;
+    @apply px-4 py-2 my-2 border-darkBlue border-2 rounded-xl;
   }
 }
