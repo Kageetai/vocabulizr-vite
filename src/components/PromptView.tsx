@@ -54,7 +54,7 @@ function PromptView({ index }: Props): JSX.Element {
   const hasLabelsInPrompt = !!labelsInPrompt.length;
   const hasLabels = !!labels.length;
   const labelsList = labels.map((l) => l.description).join(', ');
-  // const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
+  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
 
   if (!currentPrompt) {
     return <Redirect to="/" />;
@@ -110,11 +110,13 @@ function PromptView({ index }: Props): JSX.Element {
         onSuccess={onSuccess}
       />
 
-      {isDebug && labelsList}
+      {captureCount > 2 && (
+        <Link href={`/${index}/success`}>
+          <small>... or skip</small>
+        </Link>
+      )}
 
-      {/*<Link href={nextRoute}>*/}
-      {/*  <small>Skip</small>*/}
-      {/*</Link>*/}
+      {isDebug && labelsList}
     </div>
   );
 }

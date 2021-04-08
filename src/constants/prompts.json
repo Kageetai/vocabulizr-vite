@@ -33,7 +33,9 @@
     "accepted": [
       "glass",
       "cup",
-      "dish"
+      "dish",
+      "tableware",
+      "liquid"
     ],
     "translation": "Drown in a glass of water.",
     "explanation": "To make a big deal out of something small. ",
