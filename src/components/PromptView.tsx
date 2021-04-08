@@ -38,6 +38,9 @@ function PromptView({ index }: Props): JSX.Element {
     postImage(imageSrc).then(setLabels);
     dispatch(saveScreenshot({ index, imageSrc }));
     setCaptureCount((c) => c + 1);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    dataLayer.push({ event: 'cameraCaptureButton-click' });
   };
 
   const onSuccess = () => {
@@ -54,7 +57,6 @@ function PromptView({ index }: Props): JSX.Element {
   const hasLabelsInPrompt = !!labelsInPrompt.length;
   const hasLabels = !!labels.length;
   const labelsList = labels.map((l) => l.description).join(', ');
-  const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
 
   if (!currentPrompt) {
     return <Redirect to="/" />;
