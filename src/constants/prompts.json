@@ -33,7 +33,6 @@
     "accepted": [
       "glass",
       "cup",
-      "tableware",
       "dish"
     ],
     "translation": "Drown in a glass of water.",
@@ -46,8 +45,10 @@
     "hint": "a round red fruit used in salads and hamburguers.",
     "accepted": [
       "tomato",
+      "plum tomato",
       "fruit",
-      "food"
+      "plant",
+      "natural foods"
     ],
     "translation": "What's the end point for a tomato? To speak in public and turn red.",
     "explanation": "The end point (colmo) is a double meaning of the most a tomato could tolerate (the embarassment of public speaking) and also when you know a tomate is ripe (when it turns red).",
@@ -59,7 +60,6 @@
     "hint": "an object with four teeth that you use to eat spaghetti.",
     "accepted": [
       "fork",
-      "tableware",
       "silverware",
       "kitchen utensil"
     ],
