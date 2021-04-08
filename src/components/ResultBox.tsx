@@ -25,7 +25,7 @@ function PromptView({
       <div
         className={`border-box flex items-center text-left ${
           !hasLabels && `opacity-50`
-        }`}
+        } ${hasLabels && `hasLabels`}`}
       >
         <div className="w-11 mr-4 flex-shrink-0">
           <img src="/lens.svg" alt="Lens" />

@@ -80,7 +80,7 @@ function PromptView({ index }: Props): JSX.Element {
         </div>
       </div>
 
-      <p className="leading-1 -mt-2 text-xl">
+      <p className="leading-1 -my-2 text-xl">
         {Array.from({ length: promptsLength }, (_, i) => (
           <Link key={i} href={`/${i}`}>
             <span
