@@ -97,7 +97,7 @@ function PromptView({ index }: Props): JSX.Element {
       <CameraBox onCapture={onCapture} />
 
       <ResultBox
-        label={labelsInPrompt[0]?.description}
+        label={(labelsInPrompt[0] || labels[0])?.description}
         hasLabels={hasLabels}
         hasLabelsInPrompt={hasLabelsInPrompt}
         captureCount={captureCount}
