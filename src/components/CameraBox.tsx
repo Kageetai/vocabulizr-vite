@@ -12,7 +12,7 @@ interface Props {
   onCapture: (imageSrc: string) => void;
 }
 
-function PromptView({ onCapture }: Props): JSX.Element {
+function CameraBox({ onCapture }: Props): JSX.Element {
   const webcamRef = React.useRef<Webcam>(null);
   const [isUserFacing, setIsUserFacing] = useState(false);
   const [devices, setDevices] = React.useState<MediaDeviceInfo[]>([]);
@@ -86,4 +86,4 @@ function PromptView({ onCapture }: Props): JSX.Element {
   );
 }
 
-export default PromptView;
+export default CameraBox;

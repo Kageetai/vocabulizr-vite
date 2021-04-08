@@ -111,7 +111,7 @@
 
   .cameraBox {
     @apply max-w-full w-125 max-h-125 my-6 overflow-hidden rounded-xl;
-    min-height: calc(100vw - 2rem);
+    min-height: calc(min(100vw, 500px) - 2rem);
   }
 
   .cameraCaptureButton {
