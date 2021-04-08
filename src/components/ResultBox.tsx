@@ -5,7 +5,7 @@ import SuccessMessage from './SuccessMessage';
 interface Props {
   label?: string;
   hasLabels: boolean;
-  labelsInPrompt: boolean;
+  hasLabelsInPrompt: boolean;
   captureCount: number;
   onSuccess: () => void;
 }
@@ -13,14 +13,12 @@ interface Props {
 function PromptView({
   label,
   hasLabels,
-  labelsInPrompt,
+  hasLabelsInPrompt,
   captureCount,
   onSuccess,
 }: Props): JSX.Element {
-  const failure = hasLabels && !labelsInPrompt;
-  const success = hasLabels && labelsInPrompt;
-
-  console.log(captureCount);
+  const failure = hasLabels && !hasLabelsInPrompt;
+  const success = hasLabels && hasLabelsInPrompt;
 
   return (
     <>

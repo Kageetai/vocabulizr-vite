@@ -48,9 +48,10 @@ function PromptView({ index }: Props): JSX.Element {
     }, 1000);
   };
 
-  const labelsInPrompt = !!labels.filter((l) =>
+  const labelsInPrompt = labels.filter((l) =>
     currentPrompt?.accepted.includes(l.description.toLowerCase()),
-  ).length;
+  );
+  const hasLabelsInPrompt = !!labelsInPrompt.length;
   const hasLabels = !!labels.length;
   const labelsList = labels.map((l) => l.description).join(', ');
   // const nextRoute = index + 1 >= promptsLength ? `/end` : `/${index + 1}`;
@@ -96,9 +97,9 @@ function PromptView({ index }: Props): JSX.Element {
       <CameraBox onCapture={onCapture} />
 
       <ResultBox
-        label={labels[0]?.description}
+        label={labelsInPrompt[0]?.description}
         hasLabels={hasLabels}
-        labelsInPrompt={labelsInPrompt}
+        hasLabelsInPrompt={hasLabelsInPrompt}
         captureCount={captureCount}
         onSuccess={onSuccess}
       />
