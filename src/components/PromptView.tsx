@@ -63,6 +63,8 @@ function PromptView({ index }: Props): JSX.Element {
     return <Redirect to="/" />;
   }
 
+  console.log(index, promptsLength);
+
   return (
     <div>
       <Helmet>
@@ -100,10 +102,12 @@ function PromptView({ index }: Props): JSX.Element {
           {index + 1} / {promptsLength}
         </small>
 
-        {index < promptsLength && (
+        {index < promptsLength - 1 ? (
           <Link href={`/${index + 1}`}>
             <img src="/arrow-right.svg" alt="next" />
           </Link>
+        ) : (
+          <span className="w-6">&nbsp;</span>
         )}
       </div>
 
@@ -116,6 +120,12 @@ function PromptView({ index }: Props): JSX.Element {
         captureCount={captureCount}
         onSuccess={onSuccess}
       />
+
+      {captureCount > 2 && (
+        <Link href={`/${index}/success`}>
+          <small>... or skip</small>
+        </Link>
+      )}
 
       {isDebug && labelsList}
     </div>
