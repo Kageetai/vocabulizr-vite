@@ -14,6 +14,7 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-gtm-module": "^2.0.11",
+    "react-helmet": "^6.1.0",
     "react-redux": "^7.2.2",
     "react-webcam": "^5.2.2",
     "wouter": "^2.7.4"
@@ -22,6 +23,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-gtm-module": "^2.0.0",
+    "@types/react-helmet": "^6.1.0",
     "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",

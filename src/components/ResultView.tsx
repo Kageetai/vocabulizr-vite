@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'wouter';
+import { Helmet } from 'react-helmet';
 
 import { selectPromptByIndex, selectPromptLength } from '../reducers/prompts';
 
@@ -22,6 +23,10 @@ function ResultView({ index }: Props): JSX.Element {
 
   return (
     <div>
+      <Helmet>
+        <title>{`Buscamara - Result ${index + 1}`}</title>
+      </Helmet>
+
       <h2>¡Correcto!</h2>
 
       <div className="my-4">

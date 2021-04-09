@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'wouter';
+import { Helmet } from 'react-helmet';
 
 import { reset, selectDonePrompts } from '../reducers/prompts';
 
@@ -21,6 +22,10 @@ function EndView(): JSX.Element {
 
   return (
     <div>
+      <Helmet>
+        <title>{`Buscamara - End`}</title>
+      </Helmet>
+
       <h2>¡Felicidades!</h2>
 
       <div className="my-4">

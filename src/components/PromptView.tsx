@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'wouter';
 import useLocation from 'wouter/use-location';
+import { Helmet } from 'react-helmet';
 
 import { LabelAnnotation, postImage } from '../api';
 import {
@@ -64,6 +65,10 @@ function PromptView({ index }: Props): JSX.Element {
 
   return (
     <div>
+      <Helmet>
+        <title>{`Buscamara - Prompt ${index + 1}`}</title>
+      </Helmet>
+
       <h2>&nbsp;</h2>
 
       <div className="border-box flex items-center text-left">
@@ -111,12 +116,6 @@ function PromptView({ index }: Props): JSX.Element {
         captureCount={captureCount}
         onSuccess={onSuccess}
       />
-
-      {captureCount > 2 && (
-        <Link href={`/${index}/success`}>
-          <small>... or skip</small>
-        </Link>
-      )}
 
       {isDebug && labelsList}
     </div>
