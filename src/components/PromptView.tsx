@@ -52,6 +52,11 @@ function PromptView({ index }: Props): JSX.Element {
     }, 1000);
   };
 
+  const onSkip = () => {
+    dispatch(markPromptAsDone(index));
+    setLocation(index + '/success');
+  };
+
   const labelsInPrompt = labels.filter((l) =>
     currentPrompt?.accepted.includes(l.description.toLowerCase()),
   );
@@ -121,11 +126,7 @@ function PromptView({ index }: Props): JSX.Element {
         onSuccess={onSuccess}
       />
 
-      {captureCount > 2 && (
-        <Link href={`/${index}/success`}>
-          <small>... or skip</small>
-        </Link>
-      )}
+      {captureCount > 2 && <small onClick={onSkip}>... or skip</small>}
 
       {isDebug && labelsList}
     </div>
