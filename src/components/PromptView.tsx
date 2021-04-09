@@ -41,7 +41,14 @@ function PromptView({ index }: Props): JSX.Element {
     setCaptureCount((c) => c + 1);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    dataLayer.push({ event: 'cameraCaptureButton-click' });
+    window.dataLayer.push({
+      event: 'cameraCaptureButton-click',
+      eventProps: {
+        index,
+        currentPrompt,
+        labels,
+      },
+    });
   };
 
   const onSuccess = () => {
@@ -67,8 +74,6 @@ function PromptView({ index }: Props): JSX.Element {
   if (!currentPrompt) {
     return <Redirect to="/" />;
   }
-
-  console.log(index, promptsLength);
 
   return (
     <div>
